@@ -263,8 +263,44 @@
     .hpx-office--lead a { color: #9fd0f2; }
 
 
+    /* ---- hover micro-interactions --------------------------------------- */
+    .hpx-conn__item,
+    .hpx-ustat,
+    .hpx-spec,
+    .hpx-office { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .hpx-conn__item:hover,
+    .hpx-ustat:hover,
+    .hpx-spec:hover,
+    .hpx-office:hover { transform: translateY(-3px); box-shadow: var(--hpx-shadow); border-color: #cfe0ef; }
+    .hpx-ustat b { transition: color .18s ease; }
+    .hpx-ustat:hover b { color: var(--hpx-red); }
+
+    .hpx-about__stat { transition: transform .18s ease, box-shadow .18s ease; }
+    .hpx-about__stat:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -14px rgba(0, 19, 68, .3); }
+
+    .hpx-tree__leaf { transition: transform .18s ease, background-color .18s ease, border-left-color .18s ease; }
+    .hpx-tree__leaf:hover { transform: translateX(3px); background: #fff; border-left-color: var(--hpx-navy); }
+    .hpx-tree__leaf--alt:hover { border-left-color: var(--hpx-red-dark); }
+
+    .hpx-seg { transition: transform .12s ease, border-color .18s ease, color .18s ease; }
+    .hpx-seg:hover { transform: translateY(-2px); border-color: var(--hpx-blue); color: var(--hpx-blue-dark); }
+
+    .hpx-about__icon { transition: background-color .18s ease; }
+    .hpx-about__toggle:hover .hpx-about__icon { background: var(--hpx-blue); }
+    .hpx-about__more svg { transition: transform .18s ease; }
+    .hpx-about__more:hover svg { transform: translateX(3px); }
+
+    .hpx-hub img { transition: transform .35s ease; }
+    .hpx-hub img:hover { transform: scale(1.03); }
+
+    .hpx-carousel__btn { transition: background-color .15s ease, transform .15s ease; }
+    .hpx-carousel__btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
+    .hpx-carousel__dot:hover { background: rgba(255, 255, 255, .8); }
+
     @media (min-width: 760px) { .hpx-stats { grid-template-columns: repeat(4, 1fr); } }
-    @media (prefers-reduced-motion: reduce) { .hpx *, .hpx *::before, .hpx *::after { transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hpx *, .hpx *::before, .hpx *::after { transition: none !important; animation: none !important; }
+    }
   </style>
 
   <!-- inline icon set (decorative) -->
