@@ -22,7 +22,7 @@
      • The "HP Durapol" wordmark below is a plain text lockup placeholder —
        replace it with the official logo asset.
      ========================================================================= -->
-<section class="hpx" aria-labelledby="hpx-hero-title">
+<section class="hpx" aria-label="HP Petrochemicals — HP Durapol">
   <style>
     /* ---- tokens + reset ------------------------------------------------- */
     .hpx {
@@ -49,6 +49,7 @@
       display: block;
     }
     .hpx *, .hpx *::before, .hpx *::after { box-sizing: border-box; margin: 0; }
+    .hpx [hidden] { display: none !important; }
     .hpx h1, .hpx h2, .hpx h3, .hpx h4 {
       font-family: inherit; color: var(--hpx-navy);
       line-height: 1.2; font-weight: 700; letter-spacing: -.01em;
@@ -86,20 +87,23 @@
     .hpx-durapol--invert .hpx-durapol__word .d,
     .hpx-durapol--invert .hpx-durapol__tag { color: #fff; }
 
-    /* ---- buttons -------------------------------------------------------- */
-    .hpx-btn {
+    /* ---- buttons  (selectors prefixed .hpx so they beat `.hpx a`) ------- */
+    .hpx .hpx-btn {
       display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
       min-height: 2.85rem; padding: .5rem 1.5rem; border: 1px solid transparent;
       border-radius: 8px; font: inherit; font-weight: 600; font-size: .85rem;
-      cursor: pointer; transition: background-color .15s ease, transform .1s ease, border-color .15s ease;
+      text-decoration: none; cursor: pointer;
+      transition: background-color .15s ease, transform .1s ease, border-color .15s ease;
     }
-    .hpx-btn:hover { text-decoration: none; transform: translateY(-1px); }
-    .hpx-btn--primary { background: var(--hpx-navy); color: #fff; }
-    .hpx-btn--primary:hover { background: var(--hpx-blue-dark); }
-    .hpx-btn--accent { background: var(--hpx-red); color: #fff; }
-    .hpx-btn--accent:hover { background: var(--hpx-red-dark); }
-    .hpx-btn--ghost { background: transparent; border-color: rgba(255, 255, 255, .5); color: #fff; }
-    .hpx-btn--ghost:hover { background: rgba(255, 255, 255, .12); }
+    .hpx .hpx-btn:hover { text-decoration: none; transform: translateY(-1px); }
+    .hpx .hpx-btn--primary { background: var(--hpx-navy); color: #fff; }
+    .hpx .hpx-btn--primary:hover { background: var(--hpx-blue-dark); }
+    .hpx .hpx-btn--accent { background: var(--hpx-red); color: #fff; }
+    .hpx .hpx-btn--accent:hover { background: var(--hpx-red-dark); }
+    .hpx .hpx-btn--light { background: #fff; color: var(--hpx-navy); }
+    .hpx .hpx-btn--light:hover { background: #e7eef6; }
+    .hpx .hpx-btn--ghost { background: transparent; border-color: rgba(255, 255, 255, .55); color: #fff; }
+    .hpx .hpx-btn--ghost:hover { background: rgba(255, 255, 255, .14); border-color: #fff; }
 
     /* ---- hero --------------------------------------------------------------- */
     .hpx-hero {
@@ -112,21 +116,19 @@
       background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 68L0 51V17L30 0l30 17v34L30 68zm0 0v36M0 51l30 17 30-17M0 17l30 17 30-17' fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='1.4'/%3E%3C/svg%3E");
     }
     .hpx-hero > * { position: relative; }
-    .hpx-hero__brand { display: inline-flex; align-items: center; gap: 1rem; }
-    .hpx-hero__logo { display: block; height: clamp(2.5rem, 6vw, 3.5rem); width: auto; }
-    .hpx .hpx-hero__title { margin-top: 1.25rem; color: #fff; font-size: clamp(1.6rem, 3.6vw, 2.2rem); font-weight: 700; max-width: 24ch; }
-    .hpx-hero__lead { margin-top: 1.1rem; max-width: 62ch; font-size: clamp(1rem, 1.6vw, 1.1rem); color: rgba(255, 255, 255, .82); }
+    .hpx-hero__grid { display: grid; gap: clamp(1.75rem, 4vw, 2.75rem); align-items: center; }
+    .hpx-hero__logo { display: block; height: clamp(2.4rem, 5.5vw, 3.25rem); width: auto; }
+    .hpx-hero__lead { margin-top: 1.4rem; max-width: 56ch; font-size: clamp(1rem, 1.6vw, 1.08rem); color: rgba(255, 255, 255, .82); }
     .hpx-hero__actions { margin-top: 1.9rem; display: flex; flex-wrap: wrap; gap: .85rem; }
+    @media (min-width: 900px) { .hpx-hero__grid { grid-template-columns: 1.05fr .95fr; } }
 
-    /* ---- slideshow carousel --------------------------------------------- */
-    .hpx-carousel { position: relative; max-width: 860px; margin: 1.75rem auto 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--hpx-line); background: var(--hpx-navy); }
+    /* ---- slideshow carousel  (just the image, no frame) --------------- */
+    .hpx-carousel { position: relative; border-radius: 12px; overflow: hidden; }
     .hpx-carousel__viewport { overflow: hidden; }
     .hpx-carousel__track { display: flex; transition: transform .5s ease; }
     .hpx-carousel__slide { position: relative; flex: 0 0 100%; margin: 0; min-width: 0; }
-    /* creatives are ~square; contain on a brand ground avoids cropping their
-       baked-in logo/text. Switch to object-fit:cover for an edge-to-edge look. */
-    .hpx-carousel__img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--hpx-navy); }
-    .hpx-carousel__btn { position: absolute; top: calc(50% - 1.4rem); transform: translateY(-50%); width: 2.7rem; height: 2.7rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .9); color: var(--hpx-navy); cursor: pointer; transition: background-color .15s ease; z-index: 3; }
+    .hpx-carousel__img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+    .hpx-carousel__btn { position: absolute; top: 50%; transform: translateY(-50%); width: 2.4rem; height: 2.4rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); color: var(--hpx-navy); cursor: pointer; transition: background-color .15s ease; z-index: 3; }
     .hpx-carousel__btn:hover { background: #fff; }
     .hpx-carousel__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
     .hpx-carousel__btn--prev { left: .75rem; }
@@ -279,32 +281,64 @@
   <div class="hpx__section">
     <div class="hpx__wrap">
       <div class="hpx-hero">
-        <!-- LOGO: point src at the official HP Durapol logo file. Placeholder path
-             works in the standalone preview via embed/assets/. If the image is
-             missing, the text lockup below is shown instead. -->
-        <img class="hpx-hero__logo" src="assets/hp-durapol-logo.svg"
-             alt="HP Durapol - Perfect Bonding"
-             onerror="this.hidden=true;this.nextElementSibling.hidden=false" />
-        <span class="hpx-durapol hpx-durapol--invert hpx-hero__brand" hidden aria-label="HP Durapol">
-          <span>
-            <span class="hpx-durapol__word"><span class="r">HP</span> <span class="d">DURA</span><span class="c">POL</span><sup>&reg;</sup></span>
-            <span class="hpx-durapol__tag" style="display:block">PERFECT BONDING</span>
-          </span>
-        </span>
+        <div class="hpx-hero__grid">
+          <div class="hpx-hero__col">
+            <!-- LOGO: point src at the official HP Durapol logo file. Placeholder
+                 works in the standalone preview via embed/assets/. Do not
+                 recreate the mark. -->
+            <img class="hpx-hero__logo" src="assets/hp-durapol-logo.svg"
+                 alt="HP Durapol - Perfect Bonding" />
 
-        <h1 class="hpx-hero__title" id="hpx-hero-title">HP Petrochemicals</h1>
-        <p class="hpx-hero__lead">
-          A world&#8209;class dual&#8209;feed cracker and petrochemical complex, integrated
-          with the refinery at Pachpadra, will produce <strong>2.4&nbsp;MMTPA</strong> of
-          petrochemicals &mdash; polyethylene, polypropylene, benzene, toluene and
-          butadiene &mdash; marketed under the <strong>HP Durapol&reg;</strong> brand.
-        </p>
-        <div class="hpx-hero__actions">
-          <a class="hpx-btn hpx-btn--accent" href="#hpx-polymers">
-            Explore the polymer portfolio
-            <svg width="16" height="16" viewBox="0 0 24 24"><use href="#hpx-i-arrow"/></svg>
-          </a>
-          <a class="hpx-btn hpx-btn--ghost" href="#hpx-about">About Hindustan Petroleum</a>
+            <p class="hpx-hero__lead">
+              A world&#8209;class dual&#8209;feed cracker and petrochemical complex,
+              integrated with the refinery at Pachpadra, will produce
+              <strong>2.4&nbsp;MMTPA</strong> of petrochemicals &mdash; polyethylene,
+              polypropylene, benzene, toluene and butadiene &mdash; marketed under
+              the <strong>HP Durapol&reg;</strong> brand.
+            </p>
+            <div class="hpx-hero__actions">
+              <a class="hpx-btn hpx-btn--light" href="#hpx-polymers">
+                Explore the polymer portfolio
+                <svg width="16" height="16" viewBox="0 0 24 24"><use href="#hpx-i-arrow"/></svg>
+              </a>
+              <a class="hpx-btn hpx-btn--ghost" href="#hpx-about">About Hindustan Petroleum</a>
+            </div>
+          </div>
+
+          <!-- ===================== SLIDESHOW CAROUSEL =====================
+               Slide images: assets/durapol-1..5.jpg. When embedding on the live
+               site, repoint each src to an absolute path (e.g.
+               /images/durapol/slide-1.jpg) and update the alt text. Controls +
+               autoplay are wired in the script at the end of this block. -->
+          <div class="hpx-carousel" role="region" aria-roledescription="carousel"
+               aria-label="HP Durapol campaign" tabindex="0">
+            <div class="hpx-carousel__viewport">
+              <div class="hpx-carousel__track">
+                <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
+                  <img class="hpx-carousel__img" src="assets/durapol-1.jpg" alt="HP Durapol resins for a variety of needs" />
+                </figure>
+                <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
+                  <img class="hpx-carousel__img" src="assets/durapol-2.jpg" alt="Eco-friendly HP Durapol polymers" />
+                </figure>
+                <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
+                  <img class="hpx-carousel__img" src="assets/durapol-3.jpg" alt="A high-performance polymer brand, made in India" />
+                </figure>
+                <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
+                  <img class="hpx-carousel__img" src="assets/durapol-4.jpg" alt="On a mission to build superior, innovative products" />
+                </figure>
+                <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+                  <img class="hpx-carousel__img" src="assets/durapol-5.jpg" alt="Building the next generation of innovative polymers" />
+                </figure>
+              </div>
+            </div>
+            <button class="hpx-carousel__btn hpx-carousel__btn--prev" type="button" aria-label="Previous slide">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="hpx-carousel__btn hpx-carousel__btn--next" type="button" aria-label="Next slide">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="hpx-carousel__dots" role="tablist" aria-label="Choose slide"></div>
+          </div>
         </div>
 
         <dl class="hpx-stats">
@@ -313,41 +347,6 @@
           <div class="hpx-stat"><b>2 &times; 500 KTA</b><span>Polyethylene swing units</span></div>
           <div class="hpx-stat"><b>2 &times; 500 KTA</b><span>Polypropylene units</span></div>
         </dl>
-      </div>
-
-      <!-- ===================== SLIDESHOW CAROUSEL =====================
-           Slide images live in assets/durapol-1..5.jpg. When embedding on the
-           live site, repoint each src to an absolute path (e.g.
-           /images/durapol/slide-1.jpg) and update the alt text. Controls +
-           autoplay are wired in the script at the end of this block. -->
-      <div class="hpx-carousel" role="region" aria-roledescription="carousel"
-           aria-label="HP Durapol campaign" tabindex="0">
-        <div class="hpx-carousel__viewport">
-          <div class="hpx-carousel__track">
-            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-1.jpg" alt="HP Durapol resins for a variety of needs" />
-            </figure>
-            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-2.jpg" alt="Eco-friendly HP Durapol polymers" />
-            </figure>
-            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-3.jpg" alt="A high-performance polymer brand, made in India" />
-            </figure>
-            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-4.jpg" alt="On a mission to build superior, innovative products" />
-            </figure>
-            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-5.jpg" alt="Building the next generation of innovative polymers" />
-            </figure>
-          </div>
-        </div>
-        <button class="hpx-carousel__btn hpx-carousel__btn--prev" type="button" aria-label="Previous slide">
-          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="hpx-carousel__btn hpx-carousel__btn--next" type="button" aria-label="Next slide">
-          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <div class="hpx-carousel__dots" role="tablist" aria-label="Choose slide"></div>
       </div>
     </div>
   </div>
