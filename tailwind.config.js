@@ -45,16 +45,16 @@ export default {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        // HP brand palette (approximation of hindustanpetroleum.com)
+        // HP brand palette — hex values sampled from hindustanpetroleum.com CSS
         hp: {
-          navy: "#00206b",
-          blue: "#0067b1",
-          "blue-dark": "#00458a",
-          "blue-light": "#e6f0f9",
-          red: "#e2231a",
-          "red-dark": "#b81b13",
-          orange: "#f6871f",
-          teal: "#0a9396",
+          navy: "#001344",
+          blue: "#005095",
+          "blue-dark": "#003f85",
+          "blue-light": "#e8eef5",
+          red: "#df1a14",
+          "red-dark": "#b20100",
+          orange: "#df1a14",
+          teal: "#004e8f",
         },
       },
       borderRadius: {
@@ -63,8 +63,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Barlow", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        // hindustanpetroleum.com ships Montserrat as its single brand face.
+        sans: ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       boxShadow: {
         card: "0 1px 2px 0 rgb(0 32 107 / 0.04), 0 8px 24px -12px rgb(0 32 107 / 0.15)",

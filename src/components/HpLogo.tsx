@@ -19,11 +19,11 @@ export function HpLogo({
         role="img"
         aria-label="HP Petrochemicals emblem"
       >
-        <circle cx="32" cy="32" r="30" fill={invert ? "#ffffff" : "#00206b"} />
-        <circle cx="32" cy="32" r="23.5" fill={invert ? "#00206b" : "#ffffff"} />
+        <circle cx="32" cy="32" r="30" fill={invert ? "#ffffff" : "#001344"} />
+        <circle cx="32" cy="32" r="23.5" fill={invert ? "#001344" : "#ffffff"} />
         <path
           d="M19 19h6.6v9.2h12.8V19H45v26h-6.6V33.9H25.6V45H19z"
-          fill="#e2231a"
+          fill="#df1a14"
         />
       </svg>
       <span className="flex flex-col leading-none">

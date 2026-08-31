@@ -29,27 +29,15 @@ export type NavItem = {
   children?: { label: string; href: string }[];
 };
 
+/**
+ * Lightweight in-page navigation for this single page. This concept upgrades
+ * only the HP Petrochemicals page view — it does not reproduce the full
+ * hindustanpetroleum.com site header / mega-menu.
+ */
 export const NAV: NavItem[] = [
-  {
-    label: "About",
-    href: "#about",
-    children: [
-      { label: "About HP Petrochemicals", href: "#about" },
-      { label: "About Hindustan Petroleum", href: "#about-hpcl" },
-      { label: "Leadership & Governance", href: "#about" },
-    ],
-  },
-  {
-    label: "Businesses",
-    href: "#segments",
-    children: [
-      { label: "Polymers", href: "#products" },
-      { label: "Chemical Intermediates", href: "#products" },
-      { label: "Aromatics", href: "#products" },
-      { label: "Complexes & Projects", href: "#segments" },
-    ],
-  },
+  { label: "Overview", href: "#about" },
   { label: "Products", href: "#products" },
+  { label: "Complexes", href: "#segments" },
   { label: "Applications", href: "#applications" },
   { label: "Sustainability", href: "#sustainability" },
   { label: "Newsroom", href: "#news" },

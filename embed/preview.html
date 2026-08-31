@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HP Petrochemicals — embed preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root { color-scheme: light; }
+    body {
+      margin: 0;
+      font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+      color: #3a3131;
+      background: #fff;
+    }
+    /* --- mock site chrome (NOT part of the deliverable) --- */
+    .mock-bar {
+      background: #001344;
+      color: #fff;
+      font-size: .8rem;
+      padding: .55rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .mock-bar--utility { background: #000c28; color: #b6c6da; font-size: .72rem; }
+    .mock-bar strong { font-weight: 700; letter-spacing: .02em; }
+    .mock-bar nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+    .mock-note {
+      background: #fff7d6;
+      border-bottom: 1px solid #f0e2a8;
+      color: #6b5600;
+      font-size: .78rem;
+      line-height: 1.5;
+      padding: .6rem 1.25rem;
+      text-align: center;
+    }
+    .mock-note code { background: #00000010; padding: .05rem .35rem; border-radius: 4px; }
+    .mock-footer {
+      background: #e4e4e4;
+      color: #3a3131;
+      font-size: .78rem;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+    }
+    .stage { max-width: 1240px; margin-inline: auto; padding: 1.5rem clamp(.5rem, 3vw, 1.5rem); }
+    .stage-hint { font-size: .72rem; color: #8a8f98; text-align: center; margin: 0 0 .75rem; }
+  </style>
+</head>
+<body>
+  <div class="mock-bar mock-bar--utility">
+    <span>Complaints &amp; Feedback&nbsp;&nbsp;|&nbsp;&nbsp;Login Dealer/Vendor&nbsp;&nbsp;|&nbsp;&nbsp;Contact Us</span>
+    <span>A+ &nbsp; A &nbsp; A- &nbsp;·&nbsp; High Contrast &nbsp;·&nbsp; हिंदी</span>
+  </div>
+  <div class="mock-bar">
+    <strong>▧ HINDUSTAN PETROLEUM — mock header</strong>
+    <nav>Home · About Us · Our Operations · <u>Our Businesses</u> · Sustainability &amp; CSR · Media &amp; Updates · Investors</nav>
+  </div>
+
+  <div class="mock-note">
+    Preview only. The block below is the deliverable —
+    <code>embed/hp-petrochemicals.html</code> — dropped into the page body.
+    The bars above and below are a stand-in for HPCL's real header, mega-menu and footer, which stay untouched.
+  </div>
+
+  <div class="stage">
+    <p class="stage-hint">▼ start of embeddable block ▼</p>
+    <div id="mount"></div>
+    <p class="stage-hint">▲ end of embeddable block ▲</p>
+  </div>
+
+  <div class="mock-footer">Mock footer — not part of the deliverable.</div>
+
+  <script>
+    // Pull in the fragment and run its inline <script> (innerHTML won't execute it).
+    fetch("./hp-petrochemicals.html")
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var mount = document.getElementById("mount");
+        mount.innerHTML = html;
+        mount.querySelectorAll("script").forEach(function (old) {
+          var s = document.createElement("script");
+          if (old.src) { s.src = old.src; } else { s.textContent = old.textContent; }
+          old.replaceWith(s);
+        });
+      })
+      .catch(function () {
+        document.getElementById("mount").innerHTML =
+          '<p style="padding:2rem;text-align:center;color:#b20100">' +
+          "Could not load hp-petrochemicals.html — serve this folder over HTTP " +
+          "(e.g. <code>npx serve embed</code>) rather than opening the file directly.</p>";
+      });
+  </script>
+</body>
+</html>

@@ -13,27 +13,27 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 12%;
 
-    /* HP navy #00206b */
-    --primary: 223 100% 21%;
+    /* HP navy #001344 */
+    --primary: 223 100% 13%;
     --primary-foreground: 0 0% 100%;
 
     /* HP blue tint surface */
-    --secondary: 210 60% 96%;
-    --secondary-foreground: 223 100% 21%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 223 100% 13%;
 
     --muted: 210 40% 96%;
-    --muted-foreground: 215 20% 40%;
+    --muted-foreground: 215 12% 40%;
 
-    /* HP red #e2231a */
-    --accent: 3 79% 50%;
+    /* HP red #df1a14 */
+    --accent: 2 84% 48%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 3 79% 50%;
+    --destructive: 2 84% 48%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 89%;
-    --input: 214 32% 89%;
-    --ring: 205 100% 35%;
+    --border: 214 20% 89%;
+    --input: 214 20% 89%;
+    --ring: 208 100% 29%;
 
     --radius: 0.6rem;
   }

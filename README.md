@@ -1,98 +1,90 @@
-# HP Petrochemicals — Redesign Concept
+# HP Petrochemicals — page redesign
 
-A corporate-style **redesign concept** of the HP Petrochemicals page
-([hindustanpetroleum.com/hp-petrochemicals](https://www.hindustanpetroleum.com/hp-petrochemicals)),
-built as a standalone modern front-end for demo purposes.
+A corporate-style redesign of the **body content** of
+[hindustanpetroleum.com/hp-petrochemicals](https://www.hindustanpetroleum.com/hp-petrochemicals).
+It does **not** touch HPCL's site header, mega-menu or footer.
 
-> ⚠️ **Unofficial.** This project is not affiliated with, authorised by, or
-> endorsed by Hindustan Petroleum Corporation Limited. The HP roundel used here
-> is an original stylised mark, not the official logo. Figures and product
-> descriptions are paraphrased from public HPCL disclosures about the Rajasthan
+> ⚠️ **Unofficial concept.** Not affiliated with, authorised by or endorsed by
+> Hindustan Petroleum Corporation Limited. The HP roundel used in the React
+> reference is an original stylised mark, not the official logo. Figures and
+> product copy are paraphrased from public HPCL disclosures about the Rajasthan
 > Refinery (HRRL) and Visakh petrochemical projects and may be approximate.
 
-## Stack
+## What to hand over
 
-| Concern        | Choice                                             |
-| -------------- | -------------------------------------------------- |
-| Build tool     | Vite 6                                             |
-| Framework      | React 18 + TypeScript                              |
-| Styling        | Tailwind CSS 3 with CSS-variable design tokens     |
-| Components     | shadcn/ui-style primitives on Radix UI (`src/components/ui`) |
-| Icons          | lucide-react                                       |
-| Fonts          | Barlow (display) + Inter (body), via Google Fonts  |
+### ➡️ `embed/hp-petrochemicals.html` — the deliverable
 
-## Design decisions
+One self-contained block: a `<section class="hpx">` + a scoped `<style>` + a
+~15-line vanilla-JS IIFE. Paste it into the HTML content area of the
+`/hp-petrochemicals` page.
 
-- **Brand match.** The palette approximates the parent site: HP navy
-  `#00206b`, HP blue `#0067b1`, HP red `#e2231a`, plus an orange accent.
-  Tokens live in [`src/index.css`](src/index.css) and
-  [`tailwind.config.js`](tailwind.config.js) (`hp.*` colours + `--primary` /
-  `--accent` HSL vars), so re-theming is a one-file change.
-- **Typography.** Condensed, industrial **Barlow** for headings; **Inter** for
-  body — a common pairing for Indian PSU / infrastructure corporate sites.
-- **"About Hindustan Petroleum" is a small expandable button.** See
-  [`src/components/AboutHpcl.tsx`](src/components/AboutHpcl.tsx) — a compact
-  pill-style control inside the About section that expands (animated
-  `grid-rows` transition, `aria-expanded` / `aria-controls`) to reveal the
-  corporate background, key facts and an outbound link.
-- **Corporate patterns.** Utility bar + sticky condensing header with hover
-  mega-menu, dark hero with stat band, tabbed product portfolio, numbered
-  business-complex list, applications grid, dark sustainability band, newsroom,
-  split contact block, fat footer. Responsive down to mobile with a Radix
-  slide-in menu. Skip-link + focus styles for accessibility.
+- **No build, no framework, no external dependencies.**
+- Every selector is prefixed `.hpx` → cannot collide with Bootstrap /
+  `style.css` / `common.css`.
+- Uses **Montserrat**, already loaded by the site — no new web fonts.
+- The only JavaScript drives the expandable **"About Hindustan Petroleum"**
+  button. Progressive enhancement: with JS disabled the panel stays open.
+- Icons are an inline SVG `<symbol>` set — no icon font.
+- Re-theme by editing the CSS custom properties in `.hpx { … }`.
 
-## Getting started
+### `embed/preview.html` — standalone preview
+
+Wraps the block in mock header/footer bars so it can be viewed in isolation.
+Serve over HTTP (it `fetch()`es the fragment):
+
+```bash
+npx serve embed          # then open /preview.html
+# or:  python3 -m http.server -d embed 8099
+```
+
+## Theme (sampled from the live site's CSS)
+
+| Token (`--hpx-*`) | Value | Role |
+| --- | --- | --- |
+| `navy` | `#001344` | headings, dark bands |
+| `blue` | `#005095` | primary blue |
+| `blue-dark` | `#003f85` / `#004e8f` | hover, gradients |
+| `red` | `#df1a14` | accent |
+| `red-dark` | `#b20100` | accent hover |
+| `ink` | `#3a3131` | body text |
+| `line` | `#e4e4e4` | borders, grey fill |
+| font | **Montserrat** 400/500/600/700, body `0.9rem` (14.4px) | matches site scale |
+
+## Sections
+
+Hero + stat strip → **About HP Petrochemicals** (with the expandable *About
+Hindustan Petroleum* button) → approach pillars → product portfolio (Polymers /
+Chemical Intermediates / Aromatics, plain responsive grid — no JS tabs) →
+complexes (Rajasthan Refinery / Visakh / marketing) → applications grid →
+sustainability (dark band) → contact CTA.
+
+## `reference/` design (React) — optional
+
+The repo also contains a full-page React + Vite + Tailwind + shadcn-style mockup
+used to develop the visual language. It is a **reference**, not the thing you
+embed.
 
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # type-check + production build to dist/
-npm run preview    # serve the production build
+npm run build      # type-check + build to dist/
 ```
 
-Requires Node 18+.
+Key files: [src/data/content.ts](src/data/content.ts) (all copy),
+[src/components/AboutHpcl.tsx](src/components/AboutHpcl.tsx) (the expandable
+button), [tailwind.config.js](tailwind.config.js) + [src/index.css](src/index.css)
+(theme tokens).
 
-## Project structure
+## Live preview (GitHub Pages)
 
-```
-src/
-├── App.tsx                 # page composition
-├── index.css               # Tailwind layers + light/dark design tokens
-├── data/content.ts         # all copy, stats, product & project data
-├── lib/utils.ts            # cn() class merger
-└── components/
-    ├── ui/                  # button, accordion, card, badge, tabs, sheet
-    ├── SiteHeader.tsx       # utility bar + sticky nav + mobile sheet
-    ├── Hero.tsx
-    ├── AboutSection.tsx     # "About HP Petrochemicals" + pillars
-    ├── AboutHpcl.tsx        # ← the expandable "About Hindustan Petroleum" button
-    ├── ProductPortfolio.tsx # tabbed: Polymers / Intermediates / Aromatics
-    ├── BusinessSegments.tsx # Rajasthan Refinery, Visakh, Marketing
-    ├── Applications.tsx
-    ├── Sustainability.tsx
-    ├── Newsroom.tsx
-    ├── ContactCta.tsx       # demo enquiry form (non-functional)
-    └── SiteFooter.tsx
-```
+Pushed to `main`, [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+builds and publishes:
 
-## Editing content
-
-Almost everything readable is in
-[`src/data/content.ts`](src/data/content.ts) — navigation, hero stats, product
-families and grades, project highlights, application sectors, sustainability
-pillars, newsroom items and the "About Hindustan Petroleum" text.
-
-## Deploy
-
-Static output in `dist/` — deploy to GitHub Pages, Netlify, Vercel or any
-static host. For **GitHub Pages** under a project path, set Vite's `base`:
-
-```ts
-// vite.config.ts
-export default defineConfig({ base: "/hpcl_petrochemical/", /* ... */ });
-```
+- `…/hpcl_petrochemical/embed/preview.html` — the embed block in context
+- `…/hpcl_petrochemical/embed/hp-petrochemicals.html` — the raw block
+- `…/hpcl_petrochemical/` — the React reference
 
 ## License
 
-Provided as-is for demonstration and educational use. All third-party brand
-names and marks are the property of their respective owners.
+Provided as-is for demonstration and educational use. Third-party brand names and
+marks are the property of their respective owners.
