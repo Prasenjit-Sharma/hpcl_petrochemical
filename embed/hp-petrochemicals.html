@@ -119,12 +119,13 @@
     .hpx-hero__actions { margin-top: 1.9rem; display: flex; flex-wrap: wrap; gap: .85rem; }
 
     /* ---- slideshow carousel --------------------------------------------- */
-    .hpx-carousel { position: relative; margin-top: 1.75rem; border-radius: 18px; overflow: hidden; border: 1px solid var(--hpx-line); background: var(--hpx-navy); }
+    .hpx-carousel { position: relative; max-width: 860px; margin: 1.75rem auto 0; border-radius: 18px; overflow: hidden; border: 1px solid var(--hpx-line); background: var(--hpx-navy); }
     .hpx-carousel__viewport { overflow: hidden; }
     .hpx-carousel__track { display: flex; transition: transform .5s ease; }
     .hpx-carousel__slide { position: relative; flex: 0 0 100%; margin: 0; min-width: 0; }
-    .hpx-carousel__img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: linear-gradient(135deg, #001344, #005095); }
-    .hpx-carousel__cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.4rem clamp(1rem, 4vw, 2.25rem) 2.6rem; font-size: clamp(.9rem, 2vw, 1.25rem); font-weight: 700; color: #fff; background: linear-gradient(to top, rgba(0, 8, 26, .85), rgba(0, 8, 26, 0)); }
+    /* creatives are ~square; contain on a brand ground avoids cropping their
+       baked-in logo/text. Switch to object-fit:cover for an edge-to-edge look. */
+    .hpx-carousel__img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: var(--hpx-navy); }
     .hpx-carousel__btn { position: absolute; top: calc(50% - 1.4rem); transform: translateY(-50%); width: 2.7rem; height: 2.7rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .9); color: var(--hpx-navy); cursor: pointer; transition: background-color .15s ease; z-index: 3; }
     .hpx-carousel__btn:hover { background: #fff; }
     .hpx-carousel__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
@@ -315,33 +316,28 @@
       </div>
 
       <!-- ===================== SLIDESHOW CAROUSEL =====================
-           Replace each slide image: swap the <img src="assets/durapol-N.svg">
-           for the official HP Durapol campaign creative (recommended 1200x675).
-           Keep / edit the <figcaption>. Controls + autoplay are wired in the
-           script at the end of this block. -->
+           Slide images live in assets/durapol-1..5.jpg. When embedding on the
+           live site, repoint each src to an absolute path (e.g.
+           /images/durapol/slide-1.jpg) and update the alt text. Controls +
+           autoplay are wired in the script at the end of this block. -->
       <div class="hpx-carousel" role="region" aria-roledescription="carousel"
            aria-label="HP Durapol campaign" tabindex="0">
         <div class="hpx-carousel__viewport">
           <div class="hpx-carousel__track">
             <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-1.svg" alt="HP Durapol resins for a variety of needs" />
-              <figcaption class="hpx-carousel__cap">A bonding agent for a variety of needs &mdash; HDPE, LLDPE &amp; PP resins</figcaption>
+              <img class="hpx-carousel__img" src="assets/durapol-1.jpg" alt="HP Durapol resins for a variety of needs" />
             </figure>
             <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-2.svg" alt="Eco-friendly HP Durapol polymers" />
-              <figcaption class="hpx-carousel__cap">Eco&#8209;friendly HP Durapol&reg; polymers for sustainable packaging</figcaption>
+              <img class="hpx-carousel__img" src="assets/durapol-2.jpg" alt="Eco-friendly HP Durapol polymers" />
             </figure>
             <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-3.svg" alt="A high-performance polymer brand, made in India" />
-              <figcaption class="hpx-carousel__cap">A high&#8209;performance polymer brand, made in India</figcaption>
+              <img class="hpx-carousel__img" src="assets/durapol-3.jpg" alt="A high-performance polymer brand, made in India" />
             </figure>
             <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-4.svg" alt="On a mission to build superior, innovative products" />
-              <figcaption class="hpx-carousel__cap">On a mission to build superior, innovative products</figcaption>
+              <img class="hpx-carousel__img" src="assets/durapol-4.jpg" alt="On a mission to build superior, innovative products" />
             </figure>
             <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
-              <img class="hpx-carousel__img" src="assets/durapol-5.svg" alt="Building the next generation of innovative polymers" />
-              <figcaption class="hpx-carousel__cap">Building the next generation of innovative polymers</figcaption>
+              <img class="hpx-carousel__img" src="assets/durapol-5.jpg" alt="Building the next generation of innovative polymers" />
             </figure>
           </div>
         </div>
