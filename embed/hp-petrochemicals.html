@@ -113,10 +113,27 @@
     }
     .hpx-hero > * { position: relative; }
     .hpx-hero__brand { display: inline-flex; align-items: center; gap: 1rem; }
-    .hpx-hero__title { margin-top: 1.25rem; color: #fff; font-size: clamp(1.8rem, 4.6vw, 2.8rem); font-weight: 700; max-width: 22ch; }
-    .hpx-hero__title em { color: #ff5a52; font-style: normal; }
-    .hpx-hero__lead { margin-top: 1.1rem; max-width: 60ch; font-size: clamp(1rem, 1.6vw, 1.1rem); color: rgba(255, 255, 255, .82); }
+    .hpx-hero__logo { display: block; height: clamp(2.5rem, 6vw, 3.5rem); width: auto; }
+    .hpx .hpx-hero__title { margin-top: 1.25rem; color: #fff; font-size: clamp(1.6rem, 3.6vw, 2.2rem); font-weight: 700; max-width: 24ch; }
+    .hpx-hero__lead { margin-top: 1.1rem; max-width: 62ch; font-size: clamp(1rem, 1.6vw, 1.1rem); color: rgba(255, 255, 255, .82); }
     .hpx-hero__actions { margin-top: 1.9rem; display: flex; flex-wrap: wrap; gap: .85rem; }
+
+    /* ---- slideshow carousel --------------------------------------------- */
+    .hpx-carousel { position: relative; margin-top: 1.75rem; border-radius: 18px; overflow: hidden; border: 1px solid var(--hpx-line); background: var(--hpx-navy); }
+    .hpx-carousel__viewport { overflow: hidden; }
+    .hpx-carousel__track { display: flex; transition: transform .5s ease; }
+    .hpx-carousel__slide { position: relative; flex: 0 0 100%; margin: 0; min-width: 0; }
+    .hpx-carousel__img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: linear-gradient(135deg, #001344, #005095); }
+    .hpx-carousel__cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.4rem clamp(1rem, 4vw, 2.25rem) 2.6rem; font-size: clamp(.9rem, 2vw, 1.25rem); font-weight: 700; color: #fff; background: linear-gradient(to top, rgba(0, 8, 26, .85), rgba(0, 8, 26, 0)); }
+    .hpx-carousel__btn { position: absolute; top: calc(50% - 1.4rem); transform: translateY(-50%); width: 2.7rem; height: 2.7rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .9); color: var(--hpx-navy); cursor: pointer; transition: background-color .15s ease; z-index: 3; }
+    .hpx-carousel__btn:hover { background: #fff; }
+    .hpx-carousel__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    .hpx-carousel__btn--prev { left: .75rem; }
+    .hpx-carousel__btn--next { right: .75rem; }
+    .hpx-carousel__dots { position: absolute; left: 0; right: 0; bottom: .85rem; display: flex; justify-content: center; gap: .45rem; z-index: 3; }
+    .hpx-carousel__dot { width: .55rem; height: .55rem; padding: 0; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .45); cursor: pointer; transition: width .2s ease, background-color .2s ease; }
+    .hpx-carousel__dot[aria-current="true"] { width: 1.5rem; background: #fff; }
+    @media (prefers-reduced-motion: reduce) { .hpx-carousel__track { transition: none; } }
 
     .hpx-stats {
       margin-top: 2.25rem; display: grid; grid-template-columns: repeat(2, 1fr);
@@ -261,16 +278,20 @@
   <div class="hpx__section">
     <div class="hpx__wrap">
       <div class="hpx-hero">
-        <span class="hpx-durapol hpx-durapol--invert hpx-hero__brand" aria-label="HP Durapol">
+        <!-- LOGO: point src at the official HP Durapol logo file. Placeholder path
+             works in the standalone preview via embed/assets/. If the image is
+             missing, the text lockup below is shown instead. -->
+        <img class="hpx-hero__logo" src="assets/hp-durapol-logo.svg"
+             alt="HP Durapol - Perfect Bonding"
+             onerror="this.hidden=true;this.nextElementSibling.hidden=false" />
+        <span class="hpx-durapol hpx-durapol--invert hpx-hero__brand" hidden aria-label="HP Durapol">
           <span>
             <span class="hpx-durapol__word"><span class="r">HP</span> <span class="d">DURA</span><span class="c">POL</span><sup>&reg;</sup></span>
             <span class="hpx-durapol__tag" style="display:block">PERFECT BONDING</span>
           </span>
         </span>
 
-        <h1 class="hpx-hero__title" id="hpx-hero-title">
-          HPCL&rsquo;s <em>foray</em> into petrochemicals
-        </h1>
+        <h1 class="hpx-hero__title" id="hpx-hero-title">HP Petrochemicals</h1>
         <p class="hpx-hero__lead">
           A world&#8209;class dual&#8209;feed cracker and petrochemical complex, integrated
           with the refinery at Pachpadra, will produce <strong>2.4&nbsp;MMTPA</strong> of
@@ -291,6 +312,46 @@
           <div class="hpx-stat"><b>2 &times; 500 KTA</b><span>Polyethylene swing units</span></div>
           <div class="hpx-stat"><b>2 &times; 500 KTA</b><span>Polypropylene units</span></div>
         </dl>
+      </div>
+
+      <!-- ===================== SLIDESHOW CAROUSEL =====================
+           Replace each slide image: swap the <img src="assets/durapol-N.svg">
+           for the official HP Durapol campaign creative (recommended 1200x675).
+           Keep / edit the <figcaption>. Controls + autoplay are wired in the
+           script at the end of this block. -->
+      <div class="hpx-carousel" role="region" aria-roledescription="carousel"
+           aria-label="HP Durapol campaign" tabindex="0">
+        <div class="hpx-carousel__viewport">
+          <div class="hpx-carousel__track">
+            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
+              <img class="hpx-carousel__img" src="assets/durapol-1.svg" alt="HP Durapol resins for a variety of needs" />
+              <figcaption class="hpx-carousel__cap">A bonding agent for a variety of needs &mdash; HDPE, LLDPE &amp; PP resins</figcaption>
+            </figure>
+            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
+              <img class="hpx-carousel__img" src="assets/durapol-2.svg" alt="Eco-friendly HP Durapol polymers" />
+              <figcaption class="hpx-carousel__cap">Eco&#8209;friendly HP Durapol&reg; polymers for sustainable packaging</figcaption>
+            </figure>
+            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
+              <img class="hpx-carousel__img" src="assets/durapol-3.svg" alt="A high-performance polymer brand, made in India" />
+              <figcaption class="hpx-carousel__cap">A high&#8209;performance polymer brand, made in India</figcaption>
+            </figure>
+            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
+              <img class="hpx-carousel__img" src="assets/durapol-4.svg" alt="On a mission to build superior, innovative products" />
+              <figcaption class="hpx-carousel__cap">On a mission to build superior, innovative products</figcaption>
+            </figure>
+            <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+              <img class="hpx-carousel__img" src="assets/durapol-5.svg" alt="Building the next generation of innovative polymers" />
+              <figcaption class="hpx-carousel__cap">Building the next generation of innovative polymers</figcaption>
+            </figure>
+          </div>
+        </div>
+        <button class="hpx-carousel__btn hpx-carousel__btn--prev" type="button" aria-label="Previous slide">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="hpx-carousel__btn hpx-carousel__btn--next" type="button" aria-label="Next slide">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="hpx-carousel__dots" role="tablist" aria-label="Choose slide"></div>
       </div>
     </div>
   </div>
@@ -626,22 +687,78 @@
   </div>
 
   <script>
-    /* Expandable "About Hindustan Petroleum" — progressive enhancement.
-       With JS off, the panel simply stays open. */
     (function () {
       var scope = (document.currentScript && document.currentScript.closest(".hpx")) || document;
+
+      /* --- Expandable "About Hindustan Petroleum" (progressive enhancement:
+             with JS off the panel simply stays open) --- */
       var about = scope.querySelector(".hpx-about");
-      if (!about) return;
-      var btn = about.querySelector(".hpx-about__toggle");
-      var panel = about.querySelector(".hpx-about__panel");
-      about.classList.add("is-collapsed");
-      btn.setAttribute("aria-expanded", "false");
-      panel.setAttribute("aria-hidden", "true");
-      btn.addEventListener("click", function () {
-        var isOpen = !about.classList.toggle("is-collapsed");
-        btn.setAttribute("aria-expanded", String(isOpen));
-        panel.setAttribute("aria-hidden", String(!isOpen));
-      });
+      if (about) {
+        var btn = about.querySelector(".hpx-about__toggle");
+        var panel = about.querySelector(".hpx-about__panel");
+        about.classList.add("is-collapsed");
+        btn.setAttribute("aria-expanded", "false");
+        panel.setAttribute("aria-hidden", "true");
+        btn.addEventListener("click", function () {
+          var isOpen = !about.classList.toggle("is-collapsed");
+          btn.setAttribute("aria-expanded", String(isOpen));
+          panel.setAttribute("aria-hidden", String(!isOpen));
+        });
+      }
+
+      /* --- Slideshow carousel --- */
+      var car = scope.querySelector(".hpx-carousel");
+      if (car) {
+        var track = car.querySelector(".hpx-carousel__track");
+        var slides = [].slice.call(car.querySelectorAll(".hpx-carousel__slide"));
+        var dotsWrap = car.querySelector(".hpx-carousel__dots");
+        var idx = 0, timer = null;
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        var dots = slides.map(function (_s, n) {
+          var d = document.createElement("button");
+          d.type = "button";
+          d.className = "hpx-carousel__dot";
+          d.setAttribute("aria-label", "Go to slide " + (n + 1));
+          d.addEventListener("click", function () { go(n); restart(); });
+          dotsWrap.appendChild(d);
+          return d;
+        });
+
+        function go(n) {
+          idx = (n + slides.length) % slides.length;
+          track.style.transform = "translateX(" + (-idx * 100) + "%)";
+          slides.forEach(function (s, k) { s.setAttribute("aria-hidden", String(k !== idx)); });
+          dots.forEach(function (d, k) { d.setAttribute("aria-current", String(k === idx)); });
+        }
+        function next() { go(idx + 1); }
+        function prev() { go(idx - 1); }
+        function start() { if (!reduce && !timer) timer = setInterval(next, 5500); }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+        function restart() { stop(); start(); }
+
+        car.querySelector(".hpx-carousel__btn--next").addEventListener("click", function () { next(); restart(); });
+        car.querySelector(".hpx-carousel__btn--prev").addEventListener("click", function () { prev(); restart(); });
+        car.addEventListener("mouseenter", stop);
+        car.addEventListener("mouseleave", start);
+        car.addEventListener("focusin", stop);
+        car.addEventListener("focusout", start);
+        car.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight") { next(); restart(); }
+          else if (e.key === "ArrowLeft") { prev(); restart(); }
+        });
+
+        var x0 = null;
+        car.addEventListener("pointerdown", function (e) { x0 = e.clientX; });
+        car.addEventListener("pointerup", function (e) {
+          if (x0 === null) return;
+          var dx = e.clientX - x0; x0 = null;
+          if (Math.abs(dx) > 40) { (dx < 0 ? next : prev)(); restart(); }
+        });
+
+        go(0);
+        start();
+      }
     })();
   </script>
 </section>

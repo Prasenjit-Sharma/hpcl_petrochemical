@@ -54,7 +54,15 @@ npx serve embed          # then open /preview.html
 
 Follows the current page's own structure, upgraded:
 
-1. **Hero** — HP Durapol® wordmark + stat strip (9 MMTPA / 2.4 MMTPA / PE / PP).
+1. **Hero** — HP Durapol® logo + stat strip (9 MMTPA / 2.4 MMTPA / PE / PP) +
+   a **slideshow carousel** (autoplay, prev/next, dots, keyboard, swipe,
+   pause-on-hover, `prefers-reduced-motion` aware).
+
+   **Assets to swap** (placeholders live in `embed/assets/`): `hp-durapol-logo.svg`
+   → the official logo, and `durapol-1…5.svg` → the campaign creatives
+   (~1200×675). Either drop files at those paths or repoint the `src`
+   attributes; when embedded on the live site use absolute paths
+   (e.g. `/images/durapol/slide-1.jpg`). Edit the `<figcaption>` text inline.
 2. **About HP Petrochemicals** — with the expandable *About Hindustan Petroleum*
    button + three pillars.
 3. **HRRL** — JV intro (HPCL 74% / GoR 26%, 9 MMTPA, 2.4 MMTPA, Pachpadra) +
