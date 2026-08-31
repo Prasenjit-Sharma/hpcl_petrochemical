@@ -212,6 +212,8 @@
     .hpx-tree__leaves { display: grid; gap: .6rem; width: 100%; }
     .hpx-tree__leaf { border: 1px solid var(--hpx-line); border-left: 3px solid var(--hpx-cyan); border-radius: 8px; padding: .65rem .9rem; background: var(--hpx-surface); font-size: .82rem; }
     .hpx-tree__leaf b { color: var(--hpx-navy); }
+    .hpx-tree__l1--alt { background: var(--hpx-blue-dark); }
+    .hpx-tree__leaf--alt { border-left-color: var(--hpx-red); }
 
     /* ---- application segment chips ------------------------------------ */
     .hpx-segs { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: .55rem; }
@@ -529,9 +531,9 @@
         </div>
       </div>
 
-      <!-- polymer taxonomy -->
-      <div class="hpx-tree" aria-label="Polymer portfolio: Polyethylene (HDPE, LLDPE) and Polypropylene (Homopolymer, Impact Copolymer, Random Copolymer)">
-        <div class="hpx-tree__root">POLYMERS</div>
+      <!-- petrochemical-product taxonomy -->
+      <div class="hpx-tree" aria-label="Complex output: Polyethylene (HDPE, LLDPE); Polypropylene (Homopolymer, Impact Copolymer, Random Copolymer); Petrochemicals (Benzene, Toluene, Butadiene)">
+        <div class="hpx-tree__root">PETROCHEMICAL PRODUCTS</div>
         <div class="hpx-tree__rail"></div>
         <div class="hpx-tree__branches">
           <div class="hpx-tree__branch">
@@ -549,7 +551,19 @@
               <div class="hpx-tree__leaf"><b>Random copolymer</b> (RCP)</div>
             </div>
           </div>
+          <div class="hpx-tree__branch">
+            <div class="hpx-tree__l1 hpx-tree__l1--alt">Petrochemicals</div>
+            <div class="hpx-tree__leaves">
+              <div class="hpx-tree__leaf hpx-tree__leaf--alt"><b>Benzene</b> &mdash; aromatic</div>
+              <div class="hpx-tree__leaf hpx-tree__leaf--alt"><b>Toluene</b> &mdash; aromatic</div>
+              <div class="hpx-tree__leaf hpx-tree__leaf--alt"><b>Butadiene</b> &mdash; C4 diolefin</div>
+            </div>
+          </div>
         </div>
+        <p style="margin-top:1rem;font-size:.76rem;color:var(--hpx-muted);text-align:center">
+          Benzene, toluene &amp; butadiene are detailed
+          <a href="#hpx-petrochemicals">in the section below</a>.
+        </p>
       </div>
 
       <h3 style="margin-top:2.5rem;font-size:1.05rem">Serving all key application segments</h3>
