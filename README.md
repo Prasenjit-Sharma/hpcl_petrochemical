@@ -1,110 +1,53 @@
-# HP Petrochemicals — page redesign
+# HP Petrochemicals - page redesign (embeddable)
 
 A corporate-style redesign of the **body content** of
 [hindustanpetroleum.com/hp-petrochemicals](https://www.hindustanpetroleum.com/hp-petrochemicals).
-It does **not** touch HPCL's site header, mega-menu or footer.
+It does not touch HPCL's site header, mega-menu or footer.
 
-> ⚠️ **Unofficial concept.** Not affiliated with, authorised by or endorsed by
-> Hindustan Petroleum Corporation Limited. The HP roundel used in the React
-> reference is an original stylised mark, not the official logo. Figures and
-> product copy are paraphrased from public HPCL disclosures about the Rajasthan
-> Refinery (HRRL) and Visakh petrochemical projects and may be approximate.
+## The deliverable
 
-## What to hand over
+**`embed/hp-petrochemicals.html`** - one self-contained block: a
+`<section class="hpx">` + a scoped `<style>` + a small vanilla-JS IIFE. Paste it
+into the HTML content area of the `/hp-petrochemicals` page.
 
-### ➡️ `embed/hp-petrochemicals.html` — the deliverable
-
-One self-contained block: a `<section class="hpx">` + a scoped `<style>` + a
-~15-line vanilla-JS IIFE. Paste it into the HTML content area of the
-`/hp-petrochemicals` page.
-
-- **No build, no framework, no external dependencies.**
-- Every selector is prefixed `.hpx` → cannot collide with Bootstrap /
+- No build, no framework, no external dependencies.
+- Every selector is prefixed `.hpx` -> cannot collide with Bootstrap /
   `style.css` / `common.css`.
-- Uses **Montserrat**, already loaded by the site — no new web fonts.
-- The only JavaScript drives the expandable **"About Hindustan Petroleum"**
-  button. Progressive enhancement: with JS disabled the panel stays open.
-- Icons are an inline SVG `<symbol>` set — no icon font.
-- Re-theme by editing the CSS custom properties in `.hpx { … }`.
+- Uses **Montserrat**, already loaded by the site.
+- JS drives the expandable *About Hindustan Petroleum* panel and the two
+  slideshow carousels (autoplay, prev/next, dots, keyboard, swipe,
+  pause-on-hover, `prefers-reduced-motion` aware).
+- Re-theme via the CSS custom properties in `.hpx { ... }`. Colours are sampled
+  from the live site: navy `#001344`, blue `#005095` / `#003f85`, red `#df1a14`
+  / `#b20100`, ink `#3a3131`, line `#e4e4e4`, Durapol cyan `#1aa7dd`.
 
-### `embed/preview.html` — standalone preview
+### Images (`embed/assets/`)
 
-Wraps the block in mock header/footer bars so it can be viewed in isolation.
-Serve over HTTP (it `fetch()`es the fragment):
+| File | Used for |
+| --- | --- |
+| `hp-durapol-logo.svg` | hero logo (placeholder - drop in the official file) |
+| `durapol-1..5.jpg` | hero carousel |
+| `refinery-1..3.jpg` | HRRL section carousel |
 
-```bash
-npx serve embed          # then open /preview.html
-# or:  python3 -m http.server -d embed 8099
-```
-
-## Theme (sampled from the live site's CSS)
-
-| Token (`--hpx-*`) | Value | Role |
-| --- | --- | --- |
-| `navy` | `#001344` | headings, dark bands |
-| `blue` | `#005095` | primary blue |
-| `blue-dark` | `#003f85` / `#004e8f` | hover, gradients |
-| `red` | `#df1a14` | accent |
-| `red-dark` | `#b20100` | accent hover |
-| `ink` | `#3a3131` | body text |
-| `line` | `#e4e4e4` | borders, grey fill |
-| font | **Montserrat** 400/500/600/700, body `0.9rem` (14.4px) | matches site scale |
+When embedding on the live site, repoint each `src` to an absolute path
+(e.g. `/images/durapol/slide-1.jpg`) and update the `alt` text.
 
 ## Sections
 
-Follows the current page's own structure, upgraded:
+Hero (logo + stat strip + campaign carousel) -> About HP Petrochemicals (with
+the expandable *About Hindustan Petroleum* panel) -> HRRL (JV intro + photo
+carousel + six "uniqueness" stats) -> Thrive with the right connections
+(logistics + hub diagram) -> HP Durapol polymers (licensor spec cards + product
+taxonomy, incl. benzene / toluene / butadiene) -> Contact offices.
 
-1. **Hero** — HP Durapol® logo + stat strip (9 MMTPA / 2.4 MMTPA / PE / PP) +
-   a **slideshow carousel** (autoplay, prev/next, dots, keyboard, swipe,
-   pause-on-hover, `prefers-reduced-motion` aware).
+## Preview
 
-   **Assets to swap** (placeholders live in `embed/assets/`): `hp-durapol-logo.svg`
-   → the official logo, and `durapol-1…5.svg` → the campaign creatives
-   (~1200×675). Either drop files at those paths or repoint the `src`
-   attributes; when embedded on the live site use absolute paths
-   (e.g. `/images/durapol/slide-1.jpg`). Edit the `<figcaption>` text inline.
-2. **About HP Petrochemicals** — with the expandable *About Hindustan Petroleum*
-   button + three pillars.
-3. **HRRL** — JV intro (HPCL 74% / GoR 26%, 9 MMTPA, 2.4 MMTPA, Pachpadra) +
-   six "uniqueness" stat cards (26% intensity, Nelson 17, EII 78, 2×500 KTPA
-   swing train, 2×490 KTPA PPU train, 85%+ local content).
-4. **Thrive with the right connections** — road/rail, city proximity,
-   Amritsar–Jamnagar Expressway, Mundra/Kandla ports + an inline-SVG hub diagram.
-5. **HP Durapol® polymers** — narrative + two licensor spec cards (Univation
-   UNIPOL™ PE / Lummus Novolen PP, 2×500 KTA each) + a polymer taxonomy tree
-   (PE → HDPE/LLDPE; PP → homopolymer/impact/random) + application-segment chips.
-6. **Contact** — the three real petrochemical-marketing offices (Sion HQ,
-   Bandra, Ahmedabad).
-
-Figures come from the public HPCL / HRRL page — verify before publishing.
-
-## `reference/` design (React) — optional
-
-The repo also contains a full-page React + Vite + Tailwind + shadcn-style mockup
-used to develop the visual language. It is a **reference**, not the thing you
-embed.
+`embed/preview.html` injects **only** the block - no mock chrome. Serve over
+HTTP (it `fetch()`es the fragment):
 
 ```bash
-npm install
-npm run dev        # http://localhost:5173
-npm run build      # type-check + build to dist/
+python3 -m http.server -d embed 8000   # then open http://localhost:8000/preview.html
 ```
 
-Key files: [src/data/content.ts](src/data/content.ts) (all copy),
-[src/components/AboutHpcl.tsx](src/components/AboutHpcl.tsx) (the expandable
-button), [tailwind.config.js](tailwind.config.js) + [src/index.css](src/index.css)
-(theme tokens).
-
-## Live preview (GitHub Pages)
-
-Pushed to `main`, [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
-builds and publishes:
-
-- `…/hpcl_petrochemical/embed/preview.html` — the embed block in context
-- `…/hpcl_petrochemical/embed/hp-petrochemicals.html` — the raw block
-- `…/hpcl_petrochemical/` — the React reference
-
-## License
-
-Provided as-is for demonstration and educational use. Third-party brand names and
-marks are the property of their respective owners.
+GitHub Pages publishes the same preview at the repo's Pages URL
+(see `.github/workflows/deploy.yml`).
