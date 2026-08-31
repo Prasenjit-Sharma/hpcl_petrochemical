@@ -52,11 +52,23 @@ npx serve embed          # then open /preview.html
 
 ## Sections
 
-Hero + stat strip → **About HP Petrochemicals** (with the expandable *About
-Hindustan Petroleum* button) → approach pillars → product portfolio (Polymers /
-Chemical Intermediates / Aromatics, plain responsive grid — no JS tabs) →
-complexes (Rajasthan Refinery / Visakh / marketing) → applications grid →
-sustainability (dark band) → contact CTA.
+Follows the current page's own structure, upgraded:
+
+1. **Hero** — HP Durapol® wordmark + stat strip (9 MMTPA / 2.4 MMTPA / PE / PP).
+2. **About HP Petrochemicals** — with the expandable *About Hindustan Petroleum*
+   button + three pillars.
+3. **HRRL** — JV intro (HPCL 74% / GoR 26%, 9 MMTPA, 2.4 MMTPA, Pachpadra) +
+   six "uniqueness" stat cards (26% intensity, Nelson 17, EII 78, 2×500 KTPA
+   swing train, 2×490 KTPA PPU train, 85%+ local content).
+4. **Thrive with the right connections** — road/rail, city proximity,
+   Amritsar–Jamnagar Expressway, Mundra/Kandla ports + an inline-SVG hub diagram.
+5. **HP Durapol® polymers** — narrative + two licensor spec cards (Univation
+   UNIPOL™ PE / Lummus Novolen PP, 2×500 KTA each) + a polymer taxonomy tree
+   (PE → HDPE/LLDPE; PP → homopolymer/impact/random) + application-segment chips.
+6. **Contact** — the three real petrochemical-marketing offices (Sion HQ,
+   Bandra, Ahmedabad).
+
+Figures come from the public HPCL / HRRL page — verify before publishing.
 
 ## `reference/` design (React) — optional
 

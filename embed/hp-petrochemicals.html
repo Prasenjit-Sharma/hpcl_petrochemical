@@ -1,19 +1,26 @@
 <!-- ============================================================================
-     HP PETROCHEMICALS  —  page-body redesign (embeddable block)
+     HP DURAPOL  /  HP PETROCHEMICALS   —   page-body redesign (embeddable block)
      ----------------------------------------------------------------------------
      Paste this whole block into the HTML content area of the /hp-petrochemicals
      page. It keeps the existing hindustanpetroleum.com header, mega-menu and
-     footer untouched.
+     footer untouched, and follows the structure of the current page:
+       hero  ->  HRRL complex + "uniqueness" stats  ->  logistics / connections
+       ->  HP Durapol PE & PP (licensor specs + polymer taxonomy)  ->  contacts.
 
      • Every selector is prefixed .hpx  -> will not collide with Bootstrap /
        style.css / common.css.
      • Font: Montserrat (already loaded by the site). No new fonts, no libraries.
-     • The only JavaScript is a ~15-line IIFE that drives the expandable
-       "About Hindustan Petroleum" button (progressive enhancement: if JS is
-       disabled the panel stays open).
-     • Re-theme everything by editing the CSS custom properties in .hpx {}.
-     • Colours are taken from the live site's stylesheet
-       (#001344 navy, #005095 blue, #df1a14 red, #3a3131 ink, #e4e4e4 line).
+     • The only JavaScript is a ~15-line IIFE for the expandable
+       "About Hindustan Petroleum" button (progressive enhancement: with JS off
+       the panel stays open).
+     • Icons + diagrams are inline SVG. Re-theme via the CSS custom properties
+       in .hpx {}.
+     • Colours sampled from the live site's stylesheet:
+       #001344 navy · #005095 blue · #003f85 blue-dark · #df1a14 red ·
+       #b20100 red-dark · #3a3131 ink · #e4e4e4 line.  Durapol cyan (#1aa7dd)
+       is added for the wordmark + diagrams.
+     • The "HP Durapol" wordmark below is a plain text lockup placeholder —
+       replace it with the official logo asset.
      ========================================================================= -->
 <section class="hpx" aria-labelledby="hpx-hero-title">
   <style>
@@ -22,12 +29,14 @@
       --hpx-navy: #001344;
       --hpx-blue: #005095;
       --hpx-blue-dark: #003f85;
+      --hpx-cyan: #1aa7dd;
       --hpx-red: #df1a14;
       --hpx-red-dark: #b20100;
       --hpx-ink: #3a3131;
       --hpx-muted: #63666a;
       --hpx-line: #e4e4e4;
       --hpx-surface: #f4f6f9;
+      --hpx-surface-blue: #eef4fa;
       --hpx-radius: 14px;
       --hpx-shadow: 0 18px 40px -20px rgba(0, 19, 68, .28);
       --hpx-wrap: 1200px;
@@ -39,16 +48,10 @@
       -webkit-font-smoothing: antialiased;
       display: block;
     }
-    .hpx *,
-    .hpx *::before,
-    .hpx *::after { box-sizing: border-box; margin: 0; }
-
+    .hpx *, .hpx *::before, .hpx *::after { box-sizing: border-box; margin: 0; }
     .hpx h1, .hpx h2, .hpx h3, .hpx h4 {
-      font-family: inherit;
-      color: var(--hpx-navy);
-      line-height: 1.18;
-      font-weight: 700;
-      letter-spacing: -.01em;
+      font-family: inherit; color: var(--hpx-navy);
+      line-height: 1.2; font-weight: 700; letter-spacing: -.01em;
     }
     .hpx p { margin: 0; }
     .hpx a { color: var(--hpx-blue); text-decoration: none; }
@@ -57,449 +60,197 @@
     .hpx img, .hpx svg { max-width: 100%; }
 
     /* ---- layout helpers ---------------------------------------------------- */
-    .hpx__wrap {
-      max-width: var(--hpx-wrap);
-      margin-inline: auto;
-      padding-inline: clamp(1rem, 4vw, 2rem);
-    }
+    .hpx__wrap { max-width: var(--hpx-wrap); margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
     .hpx__section { padding-block: clamp(2.75rem, 7vw, 5rem); }
     .hpx__section--alt { background: var(--hpx-surface); }
-
+    .hpx__head { max-width: 760px; }
     .hpx__eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: .6rem;
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--hpx-blue);
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .72rem; font-weight: 600; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--hpx-blue);
     }
-    .hpx__eyebrow::before {
-      content: "";
-      width: 26px;
-      height: 2px;
-      background: var(--hpx-red);
-    }
+    .hpx__eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--hpx-red); }
     .hpx__eyebrow--light { color: #cfe0f0; }
-    .hpx__eyebrow--light::before { background: var(--hpx-red); }
+    .hpx__title { margin-top: .85rem; font-size: clamp(1.55rem, 3.6vw, 2.05rem); font-weight: 700; }
+    .hpx__lead { margin-top: .9rem; max-width: 64ch; font-size: clamp(.95rem, 1.4vw, 1.05rem); color: var(--hpx-muted); }
+    .hpx__lead + .hpx__lead { margin-top: .6rem; }
 
-    .hpx__title {
-      margin-top: .85rem;
-      font-size: clamp(1.55rem, 3.6vw, 2.05rem);
-      font-weight: 700;
-    }
-    .hpx__lead {
-      margin-top: .9rem;
-      max-width: 62ch;
-      font-size: clamp(.95rem, 1.4vw, 1.05rem);
-      color: var(--hpx-muted);
-    }
-    .hpx__head { max-width: 720px; }
+    /* ---- HP Durapol text lockup (placeholder for the official logo) ----- */
+    .hpx-durapol { display: inline-flex; flex-direction: column; line-height: 1; }
+    .hpx-durapol__word { font-weight: 800; font-size: 1.5rem; letter-spacing: .01em; }
+    .hpx-durapol__word .r { color: var(--hpx-red); }
+    .hpx-durapol__word .d { color: var(--hpx-navy); }
+    .hpx-durapol__word .c { color: var(--hpx-cyan); }
+    .hpx-durapol__word sup { font-size: .5em; top: -.9em; }
+    .hpx-durapol__tag { margin-top: .35rem; font-size: .6rem; font-weight: 700; letter-spacing: .32em; color: var(--hpx-navy); }
+    .hpx-durapol--invert .hpx-durapol__word .d,
+    .hpx-durapol--invert .hpx-durapol__tag { color: #fff; }
 
     /* ---- buttons -------------------------------------------------------- */
     .hpx-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: .5rem;
-      min-height: 2.85rem;
-      padding: .5rem 1.5rem;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      font: inherit;
-      font-weight: 600;
-      font-size: .85rem;
-      cursor: pointer;
-      transition: background-color .15s ease, transform .1s ease, border-color .15s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      min-height: 2.85rem; padding: .5rem 1.5rem; border: 1px solid transparent;
+      border-radius: 8px; font: inherit; font-weight: 600; font-size: .85rem;
+      cursor: pointer; transition: background-color .15s ease, transform .1s ease, border-color .15s ease;
     }
     .hpx-btn:hover { text-decoration: none; transform: translateY(-1px); }
-    .hpx-btn:active { transform: translateY(0); }
     .hpx-btn--primary { background: var(--hpx-navy); color: #fff; }
     .hpx-btn--primary:hover { background: var(--hpx-blue-dark); }
     .hpx-btn--accent { background: var(--hpx-red); color: #fff; }
     .hpx-btn--accent:hover { background: var(--hpx-red-dark); }
     .hpx-btn--ghost { background: transparent; border-color: rgba(255, 255, 255, .5); color: #fff; }
     .hpx-btn--ghost:hover { background: rgba(255, 255, 255, .12); }
-    .hpx-btn--outline { background: #fff; border-color: rgba(0, 19, 68, .25); color: var(--hpx-navy); }
-    .hpx-btn--outline:hover { border-color: var(--hpx-navy); background: var(--hpx-surface); }
 
     /* ---- hero --------------------------------------------------------------- */
     .hpx-hero {
-      position: relative;
-      overflow: hidden;
-      border-radius: 18px;
-      padding: clamp(2.25rem, 6vw, 4.25rem);
-      color: #fff;
+      position: relative; overflow: hidden; border-radius: 18px;
+      padding: clamp(2.25rem, 6vw, 4.25rem); color: #fff;
       background: linear-gradient(135deg, #001344 0%, #003f85 70%, #004e8f 100%);
     }
     .hpx-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .8;
       background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 68L0 51V17L30 0l30 17v34L30 68zm0 0v36M0 51l30 17 30-17M0 17l30 17 30-17' fill='none' stroke='%23ffffff' stroke-opacity='0.07' stroke-width='1.4'/%3E%3C/svg%3E");
-      opacity: .8;
-      pointer-events: none;
     }
     .hpx-hero > * { position: relative; }
-    .hpx-hero__title {
-      margin-top: 1rem;
-      color: #fff;
-      font-size: clamp(1.9rem, 5vw, 3rem);
-      font-weight: 700;
-      max-width: 20ch;
-    }
+    .hpx-hero__brand { display: inline-flex; align-items: center; gap: 1rem; }
+    .hpx-hero__title { margin-top: 1.25rem; color: #fff; font-size: clamp(1.8rem, 4.6vw, 2.8rem); font-weight: 700; max-width: 22ch; }
     .hpx-hero__title em { color: #ff5a52; font-style: normal; }
-    .hpx-hero__lead {
-      margin-top: 1.1rem;
-      max-width: 56ch;
-      font-size: clamp(1rem, 1.6vw, 1.12rem);
-      color: rgba(255, 255, 255, .82);
-    }
-    .hpx-hero__actions {
-      margin-top: 1.9rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: .85rem;
-    }
-    .hpx-hero__markers {
-      margin-top: 1.9rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem 1.5rem;
-      font-size: .78rem;
-      color: rgba(255, 255, 255, .72);
-    }
-    .hpx-hero__markers li { display: flex; align-items: center; gap: .5rem; }
-    .hpx-hero__markers li::before {
-      content: "";
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: #ff5a52;
-    }
+    .hpx-hero__lead { margin-top: 1.1rem; max-width: 60ch; font-size: clamp(1rem, 1.6vw, 1.1rem); color: rgba(255, 255, 255, .82); }
+    .hpx-hero__actions { margin-top: 1.9rem; display: flex; flex-wrap: wrap; gap: .85rem; }
 
     .hpx-stats {
-      margin-top: 2.25rem;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: rgba(255, 255, 255, .16);
-      border: 1px solid rgba(255, 255, 255, .16);
-      border-radius: 12px;
-      overflow: hidden;
+      margin-top: 2.25rem; display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1px; background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 12px; overflow: hidden;
     }
     .hpx-stat { background: rgba(0, 12, 40, .34); padding: 1.05rem 1.25rem; }
-    .hpx-stat b {
-      display: block;
-      color: #fff;
-      font-size: clamp(1.15rem, 2.4vw, 1.5rem);
-      font-weight: 700;
-    }
+    .hpx-stat b { display: block; color: #fff; font-size: clamp(1.1rem, 2.4vw, 1.45rem); font-weight: 700; }
     .hpx-stat span { font-size: .72rem; color: rgba(255, 255, 255, .66); }
 
     /* ---- expandable "About Hindustan Petroleum" -------------------------- */
-    .hpx-about {
-      margin-block: 2.25rem 0;
-      border: 1px solid #cfe0ef;
-      background: #eef4fa;
-      border-radius: 12px;
-      overflow: hidden;
-    }
+    .hpx-about { margin-top: 2.25rem; border: 1px solid #cfe0ef; background: var(--hpx-surface-blue); border-radius: 12px; overflow: hidden; }
     .hpx-about__toggle {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      border: 0;
-      background: none;
-      font: inherit;
-      text-align: left;
-      color: var(--hpx-navy);
-      cursor: pointer;
+      width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem;
+      border: 0; background: none; font: inherit; text-align: left; color: var(--hpx-navy); cursor: pointer;
     }
     .hpx-about__toggle:hover { background: #e3edf7; }
     .hpx-about__toggle:focus-visible { outline: 2px solid var(--hpx-blue); outline-offset: -2px; }
-    .hpx-about__icon {
-      flex: none;
-      width: 2.35rem; height: 2.35rem;
-      border-radius: 8px;
-      background: var(--hpx-navy);
-      color: #fff;
-      display: grid;
-      place-items: center;
-    }
+    .hpx-about__icon { flex: none; width: 2.35rem; height: 2.35rem; border-radius: 8px; background: var(--hpx-navy); color: #fff; display: grid; place-items: center; }
     .hpx-about__label { flex: 1 1 auto; min-width: 0; }
     .hpx-about__label b { display: block; font-size: .92rem; font-weight: 700; }
-    .hpx-about__label span {
-      display: block;
-      font-size: .76rem;
-      color: var(--hpx-blue);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .hpx-about__plus {
-      flex: none;
-      width: 1.85rem; height: 1.85rem;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 80, 149, .4);
-      background: #fff;
-      color: var(--hpx-blue);
-      transition: transform .3s ease;
-    }
+    .hpx-about__label span { display: block; font-size: .76rem; color: var(--hpx-blue); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hpx-about__plus { flex: none; width: 1.85rem; height: 1.85rem; display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(0, 80, 149, .4); background: #fff; color: var(--hpx-blue); transition: transform .3s ease; }
     .hpx-about:not(.is-collapsed) .hpx-about__plus { transform: rotate(45deg); }
-    .hpx-about__panelwrap {
-      display: grid;
-      grid-template-rows: 1fr;
-      transition: grid-template-rows .3s ease;
-    }
+    .hpx-about__panelwrap { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .3s ease; }
     .hpx-about.is-collapsed .hpx-about__panelwrap { grid-template-rows: 0fr; }
     .hpx-about__panel { overflow: hidden; }
-    .hpx-about__inner {
-      padding: 1.1rem 1.25rem 1.35rem;
-      border-top: 1px solid rgba(0, 80, 149, .18);
-    }
+    .hpx-about__inner { padding: 1.1rem 1.25rem 1.35rem; border-top: 1px solid rgba(0, 80, 149, .18); }
     .hpx-about__inner p + p { margin-top: .7rem; }
     .hpx-about__inner p:first-child { color: var(--hpx-navy); font-weight: 600; }
-    .hpx-about__facts {
-      margin-top: 1.1rem;
-      display: grid;
-      gap: .8rem 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    }
+    .hpx-about__facts { margin-top: 1.1rem; display: grid; gap: .8rem 1.5rem; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
     .hpx-about__facts div { border-left: 2px solid var(--hpx-red); padding-left: .75rem; }
-    .hpx-about__facts dt {
-      font-size: .68rem;
-      text-transform: uppercase;
-      letter-spacing: .1em;
-      color: var(--hpx-blue);
-      font-weight: 600;
-    }
+    .hpx-about__facts dt { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--hpx-blue); font-weight: 600; }
     .hpx-about__facts dd { font-size: .85rem; font-weight: 600; color: var(--hpx-navy); }
-    .hpx-about__more {
-      margin-top: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: .35rem;
-      font-size: .8rem;
-      font-weight: 600;
-    }
+    .hpx-about__more { margin-top: 1rem; display: inline-flex; align-items: center; gap: .35rem; font-size: .8rem; font-weight: 600; }
 
     /* ---- generic card grid ----------------------------------------------- */
-    .hpx-grid {
-      margin-top: 2.25rem;
-      display: grid;
-      gap: 1.25rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    .hpx-card {
-      background: #fff;
-      border: 1px solid var(--hpx-line);
-      border-radius: var(--hpx-radius);
-      padding: 1.5rem;
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .hpx-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--hpx-shadow);
-      border-color: #cfe0ef;
-    }
-    .hpx-card__icon {
-      width: 2.6rem; height: 2.6rem;
-      border-radius: 9px;
-      display: grid;
-      place-items: center;
-      background: var(--hpx-navy);
-      color: #fff;
-      transition: background-color .2s ease;
-    }
+    .hpx-grid { margin-top: 2.25rem; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .hpx-card { background: #fff; border: 1px solid var(--hpx-line); border-radius: var(--hpx-radius); padding: 1.5rem; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .hpx-card:hover { transform: translateY(-4px); box-shadow: var(--hpx-shadow); border-color: #cfe0ef; }
+    .hpx-card__icon { width: 2.6rem; height: 2.6rem; border-radius: 9px; display: grid; place-items: center; background: var(--hpx-navy); color: #fff; transition: background-color .2s ease; }
     .hpx-card:hover .hpx-card__icon { background: var(--hpx-red); }
     .hpx-card h3 { margin-top: 1rem; font-size: 1rem; }
     .hpx-card p { margin-top: .5rem; font-size: .84rem; color: var(--hpx-muted); }
 
-    /* ---- product portfolio -------------------------------------------------- */
-    .hpx-group + .hpx-group { margin-top: 2.5rem; }
-    .hpx-group__label {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: .35rem .9rem;
-      padding-bottom: .75rem;
-      border-bottom: 1px solid var(--hpx-line);
-    }
-    .hpx-group__label h3 { font-size: 1.05rem; }
-    .hpx-group__label span { font-size: .8rem; color: var(--hpx-blue); font-weight: 600; }
-    .hpx-prod-grid {
-      margin-top: 1.25rem;
-      display: grid;
-      gap: 1.1rem;
-      grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
-    }
-    .hpx-prod {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      border: 1px solid var(--hpx-line);
-      border-radius: var(--hpx-radius);
-      padding: 1.35rem;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .hpx-prod:hover { transform: translateY(-4px); box-shadow: var(--hpx-shadow); }
-    .hpx-prod h4 { font-size: .98rem; }
-    .hpx-prod__code {
-      margin-top: .3rem;
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: var(--hpx-blue);
-    }
-    .hpx-prod p { margin-top: .6rem; font-size: .82rem; color: var(--hpx-muted); flex: 1 1 auto; }
-    .hpx-prod__uses {
-      margin-top: .9rem;
-      padding-top: .9rem;
-      border-top: 1px solid var(--hpx-line);
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-    }
-    .hpx-chip {
-      font-size: .7rem;
-      font-weight: 600;
-      color: var(--hpx-navy);
-      background: var(--hpx-surface);
-      border-radius: 6px;
-      padding: .25rem .5rem;
-    }
+    /* ---- HRRL split intro ------------------------------------------------- */
+    .hpx-split { display: grid; gap: 1.75rem; align-items: start; }
+    .hpx-split__media { border-radius: var(--hpx-radius); overflow: hidden; border: 1px solid var(--hpx-line); background: linear-gradient(135deg, #eef4fa, #dbe7f3); aspect-ratio: 4 / 3; display: grid; place-items: center; color: var(--hpx-blue-dark); text-align: center; padding: 1.5rem; }
+    .hpx-split__media span { font-size: .78rem; font-weight: 600; }
+    .hpx-split p + p { margin-top: .8rem; }
+    .hpx-split p b { color: var(--hpx-navy); }
+    @media (min-width: 860px) { .hpx-split { grid-template-columns: 1.05fr .95fr; gap: 2.5rem; } }
 
-    /* ---- complexes ---------------------------------------------------------- */
-    .hpx-complex { display: flex; flex-direction: column; }
-    .hpx-badge {
-      align-self: flex-start;
-      font-size: .66rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: .2rem .55rem;
-      border-radius: 999px;
-    }
-    .hpx-badge--live { background: #e6eef6; color: var(--hpx-blue-dark); }
-    .hpx-badge--soon { background: var(--hpx-red); color: #fff; }
-    .hpx-complex h3 { margin-top: .7rem; font-size: 1.02rem; }
-    .hpx-complex__loc {
-      margin-top: .4rem;
-      display: flex;
-      align-items: center;
-      gap: .35rem;
-      font-size: .78rem;
-      color: var(--hpx-blue-dark);
-    }
-    .hpx-complex p { margin-top: .6rem; font-size: .83rem; color: var(--hpx-muted); }
-    .hpx-complex ul { margin-top: .9rem; display: grid; gap: .45rem; }
-    .hpx-complex li {
-      position: relative;
-      padding-left: 1rem;
-      font-size: .8rem;
-      color: var(--hpx-ink);
-    }
-    .hpx-complex li::before {
-      content: "";
-      position: absolute;
-      left: 0; top: .5em;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--hpx-red);
-    }
+    /* ---- "uniqueness" stat cards --------------------------------------- */
+    .hpx-ustats { margin-top: 2rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); }
+    .hpx-ustat { border: 1px solid var(--hpx-line); border-left: 3px solid var(--hpx-red); border-radius: 10px; padding: 1.1rem 1.2rem; background: #fff; }
+    .hpx-ustat b { display: block; font-size: 1.25rem; font-weight: 800; color: var(--hpx-navy); }
+    .hpx-ustat span { display: block; margin-top: .25rem; font-size: .8rem; color: var(--hpx-muted); }
 
-    /* ---- dark band (sustainability) ------------------------------------- */
-    .hpx-dark {
-      border-radius: 18px;
-      padding: clamp(2.25rem, 6vw, 4rem);
-      color: #fff;
-      background: linear-gradient(135deg, #001344 0%, #003f85 100%);
-    }
-    .hpx-dark h2 { color: #fff; }
-    .hpx-dark .hpx__lead { color: rgba(255, 255, 255, .8); }
-    .hpx-dark .hpx-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .hpx-tile {
-      background: rgba(255, 255, 255, .06);
-      border: 1px solid rgba(255, 255, 255, .14);
-      border-radius: 12px;
-      padding: 1.4rem;
-    }
-    .hpx-tile .hpx-card__icon { background: rgba(255, 255, 255, .1); color: #ff8a84; }
-    .hpx-tile h3 { color: #fff; margin-top: 1rem; font-size: .97rem; }
-    .hpx-tile p { margin-top: .5rem; font-size: .82rem; color: rgba(255, 255, 255, .72); }
+    /* ---- logistics / connections -------------------------------------- */
+    .hpx-conn { display: grid; gap: 2rem; align-items: center; }
+    @media (min-width: 900px) { .hpx-conn { grid-template-columns: 1fr 1fr; } }
+    .hpx-conn__list { display: grid; gap: .9rem; }
+    .hpx-conn__item { border: 1px solid var(--hpx-line); border-radius: 10px; padding: 1rem 1.15rem; background: #fff; }
+    .hpx-conn__item b { color: var(--hpx-red-dark); }
+    .hpx-conn__item p { margin-top: .3rem; font-size: .83rem; color: var(--hpx-muted); }
+    .hpx-hub { overflow-x: auto; border: 1px solid var(--hpx-line); border-radius: var(--hpx-radius); background: #fff; padding: 1rem; }
+    .hpx-hub svg { display: block; min-width: 460px; margin-inline: auto; }
 
-    /* ---- contact CTA -------------------------------------------------------- */
-    .hpx-cta {
-      border: 1px solid var(--hpx-line);
-      border-radius: 18px;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr;
-    }
-    .hpx-cta__main {
-      background: var(--hpx-navy);
-      color: #fff;
-      padding: clamp(1.75rem, 4vw, 2.75rem);
-    }
-    .hpx-cta__main h2 { color: #fff; margin-top: .8rem; font-size: clamp(1.4rem, 3vw, 1.9rem); }
-    .hpx-cta__main p { margin-top: .8rem; color: rgba(255, 255, 255, .8); max-width: 46ch; }
-    .hpx-cta__main .hpx-hero__actions { margin-top: 1.5rem; }
-    .hpx-cta__aside { padding: clamp(1.75rem, 4vw, 2.75rem); background: #fff; }
-    .hpx-cta__row {
-      display: flex;
-      gap: .9rem;
-      padding: .9rem 0;
-      border-bottom: 1px solid var(--hpx-line);
-    }
-    .hpx-cta__row:last-child { border-bottom: 0; }
-    .hpx-cta__row .hpx-card__icon { width: 2.3rem; height: 2.3rem; background: var(--hpx-surface); color: var(--hpx-blue); }
-    .hpx-cta__row b { display: block; font-size: .86rem; color: var(--hpx-navy); }
-    .hpx-cta__row span { font-size: .78rem; color: var(--hpx-muted); }
+    /* ---- licensor spec cards ----------------------------------------- */
+    .hpx-specs { margin-top: 2rem; display: grid; gap: 1.25rem; }
+    @media (min-width: 820px) { .hpx-specs { grid-template-columns: 1fr 1fr; } }
+    .hpx-spec { border: 1px solid var(--hpx-line); border-radius: var(--hpx-radius); overflow: hidden; background: #fff; }
+    .hpx-spec__head { background: var(--hpx-navy); color: #fff; padding: .95rem 1.25rem; font-weight: 700; font-size: .98rem; }
+    .hpx-spec__body { padding: 1.25rem; }
+    .hpx-spec__body dl { display: grid; grid-template-columns: auto 1fr; gap: .4rem .8rem; margin-bottom: .9rem; }
+    .hpx-spec__body dt { font-weight: 700; color: var(--hpx-navy); font-size: .82rem; }
+    .hpx-spec__body dd { font-size: .82rem; color: var(--hpx-ink); }
+    .hpx-spec__body ul { display: grid; gap: .4rem; border-top: 1px solid var(--hpx-line); padding-top: .9rem; }
+    .hpx-spec__body li { position: relative; padding-left: 1rem; font-size: .82rem; color: var(--hpx-muted); }
+    .hpx-spec__body li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--hpx-red); }
 
-    .hpx__disclaimer {
-      margin-top: 1.75rem;
-      font-size: .72rem;
-      color: var(--hpx-muted);
-      text-align: center;
-    }
+    /* ---- polymer taxonomy tree ------------------------------------- */
+    .hpx-tree { margin-top: 2.25rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .hpx-tree__root { background: var(--hpx-navy); color: #fff; font-weight: 800; letter-spacing: .06em; padding: .8rem 2rem; border-radius: 10px; }
+    .hpx-tree__rail { width: 2px; height: 1.1rem; background: var(--hpx-red); }
+    .hpx-tree__branches { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; width: 100%; }
+    .hpx-tree__branch { flex: 1 1 240px; max-width: 340px; display: flex; flex-direction: column; align-items: center; gap: .7rem; }
+    .hpx-tree__l1 { width: 100%; text-align: center; background: var(--hpx-blue); color: #fff; font-weight: 700; padding: .7rem 1rem; border-radius: 9px; }
+    .hpx-tree__leaves { display: grid; gap: .6rem; width: 100%; }
+    .hpx-tree__leaf { border: 1px solid var(--hpx-line); border-left: 3px solid var(--hpx-cyan); border-radius: 8px; padding: .65rem .9rem; background: var(--hpx-surface); font-size: .82rem; }
+    .hpx-tree__leaf b { color: var(--hpx-navy); }
 
-    /* ---- responsive ---------------------------------------------------------- */
-    @media (min-width: 760px) {
-      .hpx-stats { grid-template-columns: repeat(4, 1fr); }
-    }
-    @media (min-width: 900px) {
-      .hpx-cta { grid-template-columns: 1.05fr .95fr; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hpx *, .hpx *::before, .hpx *::after { transition: none !important; }
-    }
+    /* ---- application segment chips ------------------------------------ */
+    .hpx-segs { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: .55rem; }
+    .hpx-seg { display: inline-flex; align-items: center; gap: .45rem; border: 1px solid var(--hpx-line); border-radius: 999px; padding: .4rem .9rem; font-size: .8rem; font-weight: 600; color: var(--hpx-navy); background: #fff; }
+    .hpx-seg svg { color: var(--hpx-blue); }
+
+    /* ---- contact offices ------------------------------------------------ */
+    .hpx-offices { margin-top: 2rem; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); }
+    .hpx-office { border: 1px solid var(--hpx-line); border-radius: var(--hpx-radius); background: #fff; padding: 1.4rem; }
+    .hpx-office h3 { font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; color: var(--hpx-blue); }
+    .hpx-office__addr { margin-top: .7rem; font-size: .84rem; color: var(--hpx-ink); font-style: normal; line-height: 1.55; }
+    .hpx-office__meta { margin-top: .8rem; display: grid; gap: .35rem; font-size: .82rem; }
+    .hpx-office__meta a { font-weight: 600; }
+    .hpx-office--lead { background: var(--hpx-navy); color: #fff; }
+    .hpx-office--lead h3 { color: #7fb2dd; }
+    .hpx-office--lead .hpx-office__addr { color: rgba(255, 255, 255, .82); }
+    .hpx-office--lead a { color: #9fd0f2; }
+
+    .hpx__disclaimer { margin-top: 1.75rem; font-size: .72rem; color: var(--hpx-muted); text-align: center; }
+
+    @media (min-width: 760px) { .hpx-stats { grid-template-columns: repeat(4, 1fr); } }
+    @media (prefers-reduced-motion: reduce) { .hpx *, .hpx *::before, .hpx *::after { transition: none !important; } }
   </style>
 
   <!-- inline icon set (decorative) -->
-  <svg class="hpx" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
       <g id="hpx-i-factory"><path d="M3 21h18M4 21V9l6 4V9l6 4V5l4 2v14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-flask"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M7 15h10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
-      <g id="hpx-i-shield"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
-      <g id="hpx-i-leaf"><path d="M20 4S9 4 6 11c-2 4 0 8 3 9 4-9 11-11 11-11M5 20c2-6 6-9 10-10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
+      <g id="hpx-i-globe"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="1.7"/></g>
+      <g id="hpx-i-route"><path d="M6 19h9a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="6" cy="19" r="2.4" fill="currentColor"/><circle cx="18" cy="5" r="2.4" fill="currentColor"/></g>
       <g id="hpx-i-box"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zM4 7.5l8 4.5 8-4.5M12 12v9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
-      <g id="hpx-i-beaker"><path d="M8 3h8M9 3v5l-4 8a3 3 0 0 0 3 4h8a3 3 0 0 0 3-4l-4-8V3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-drop"><path d="M12 3s7 7 7 12a7 7 0 0 1-14 0c0-5 7-12 7-12z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-truck"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-layers"><path d="M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5M3 17l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
-      <g id="hpx-i-wind"><path d="M3 8h11a3 3 0 1 0-3-3M3 16h16a3 3 0 1 1-3 3M3 12h8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></g>
+      <g id="hpx-i-leaf"><path d="M20 4S9 4 6 11c-2 4 0 8 3 9 4-9 11-11 11-11M5 20c2-6 6-9 10-10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-spark"><path d="M12 3l2.2 5.5L20 10l-5.8 1.5L12 17l-2.2-5.5L4 10l5.8-1.5L12 3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
-      <g id="hpx-i-recycle"><path d="M7 7l3-4 3 4M17 10l3 4-4 2M7 17l-3-4 4-2M10 3l6 10M20 14l-6 1M4 13l4 8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
-      <g id="hpx-i-pin"><path d="M12 22s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
+      <g id="hpx-i-shield"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-building"><path d="M4 21V5l8-2 8 2v16M9 21v-4h6v4M8 8h1M8 12h1M15 8h1M15 12h1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-mail"><path d="M3 6h18v12H3zM3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-phone"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
+      <g id="hpx-i-pin"><path d="M12 22s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></g>
       <g id="hpx-i-arrow"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
     </defs>
   </svg>
@@ -508,61 +259,57 @@
   <div class="hpx__section">
     <div class="hpx__wrap">
       <div class="hpx-hero">
-        <span class="hpx__eyebrow hpx__eyebrow--light">HP Petrochemicals</span>
+        <span class="hpx-durapol hpx-durapol--invert hpx-hero__brand" aria-label="HP Durapol">
+          <span>
+            <span class="hpx-durapol__word"><span class="r">HP</span> <span class="d">DURA</span><span class="c">POL</span><sup>&reg;</sup></span>
+            <span class="hpx-durapol__tag" style="display:block">PERFECT BONDING</span>
+          </span>
+        </span>
+
         <h1 class="hpx-hero__title" id="hpx-hero-title">
-          Building blocks for a <em>self&#8209;reliant</em> India
+          HPCL&rsquo;s <em>foray</em> into petrochemicals
         </h1>
         <p class="hpx-hero__lead">
-          HPCL &mdash; one of India's leading refining &amp; marketing public sector
-          entities &mdash; is making a major foray into the country's petrochemical
-          market, embedding world&#8209;scale cracker and derivative units into its
-          refineries.
+          A world&#8209;class dual&#8209;feed cracker and petrochemical complex, integrated
+          with the refinery at Pachpadra, will produce <strong>2.4&nbsp;MMTPA</strong> of
+          petrochemicals &mdash; polyethylene, polypropylene, benzene, toluene and
+          butadiene &mdash; marketed under the <strong>HP Durapol&reg;</strong> brand.
         </p>
         <div class="hpx-hero__actions">
-          <a class="hpx-btn hpx-btn--accent" href="#hpx-products">
-            Explore the product slate
+          <a class="hpx-btn hpx-btn--accent" href="#hpx-polymers">
+            Explore the polymer portfolio
             <svg width="16" height="16" viewBox="0 0 24 24"><use href="#hpx-i-arrow"/></svg>
           </a>
           <a class="hpx-btn hpx-btn--ghost" href="#hpx-about">About Hindustan Petroleum</a>
         </div>
-        <ul class="hpx-hero__markers">
-          <li>Maharatna PSU</li>
-          <li>Fortune Global 500</li>
-          <li>Refinery&#8209;integrated model</li>
-          <li>Licensed process technology</li>
-          <li>Pan&#8209;India logistics</li>
-        </ul>
 
         <dl class="hpx-stats">
-          <div class="hpx-stat"><b>~2.4 MMTPA</b><span>Planned petrochemical capacity</span></div>
-          <div class="hpx-stat"><b>~1,000 KTA</b><span>Polyethylene &amp; polypropylene, each</span></div>
-          <div class="hpx-stat"><b>9 MMTPA</b><span>Integrated refining throughput</span></div>
-          <div class="hpx-stat"><b>18+</b><span>Polymer &amp; chemical grades planned</span></div>
+          <div class="hpx-stat"><b>9 MMTPA</b><span>Greenfield refinery (HRRL, Pachpadra)</span></div>
+          <div class="hpx-stat"><b>2.4 MMTPA</b><span>Petrochemical products in the complex</span></div>
+          <div class="hpx-stat"><b>2 &times; 500 KTA</b><span>Polyethylene swing units</span></div>
+          <div class="hpx-stat"><b>2 &times; 500 KTA</b><span>Polypropylene units</span></div>
         </dl>
       </div>
     </div>
   </div>
 
-  <!-- ===================== OVERVIEW + ABOUT HPCL ===================== -->
+  <!-- ===================== ABOUT + EXPANDABLE HPCL ===================== -->
   <div class="hpx__section hpx__section--alt" id="hpx-about">
     <div class="hpx__wrap">
       <div class="hpx__head">
         <span class="hpx__eyebrow">About HP Petrochemicals</span>
         <h2 class="hpx__title">Value addition, integrated at the source</h2>
         <p class="hpx__lead">
-          Rather than shipping refinery streams out as low&#8209;value fuel
-          components, HPCL is converting them &mdash; on site &mdash; into the
-          polymers and chemicals that Indian manufacturing still imports today.
+          By building cracker and derivative units into its refinery at Pachpadra,
+          HPCL converts its own hydrocarbon streams into the polymers and chemicals
+          that Indian industry needs &mdash; capturing more value from every barrel.
         </p>
       </div>
 
       <!-- ---------- the expandable button ---------- -->
       <div class="hpx-about">
-        <button class="hpx-about__toggle" type="button"
-                aria-expanded="true" aria-controls="hpx-about-panel">
-          <span class="hpx-about__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24"><use href="#hpx-i-building"/></svg>
-          </span>
+        <button class="hpx-about__toggle" type="button" aria-expanded="true" aria-controls="hpx-about-panel">
+          <span class="hpx-about__icon"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#hpx-i-building"/></svg></span>
           <span class="hpx-about__label">
             <b>About Hindustan Petroleum</b>
             <span>Maharatna PSU &middot; Fortune Global 500 &middot; parent company</span>
@@ -572,26 +319,24 @@
           </span>
         </button>
         <div class="hpx-about__panelwrap">
-          <div class="hpx-about__panel" id="hpx-about-panel" role="region"
-               aria-label="About Hindustan Petroleum">
+          <div class="hpx-about__panel" id="hpx-about-panel" role="region" aria-label="About Hindustan Petroleum">
             <div class="hpx-about__inner">
               <p>
-                Hindustan Petroleum Corporation Limited (HPCL) is a Maharatna
-                Central Public Sector Enterprise and a Fortune Global 500 company,
-                majority&#8209;owned through Oil and Natural Gas Corporation (ONGC).
+                Hindustan Petroleum Corporation Limited (HPCL) is a Maharatna Central
+                Public Sector Enterprise and a Fortune Global 500 company, majority
+                owned through Oil and Natural Gas Corporation (ONGC).
               </p>
               <p>
-                HPCL runs a nationwide downstream energy business &mdash; refineries
-                at Mumbai and Visakhapatnam, joint&#8209;venture refineries at
-                Bathinda and Pachpadra, and a vast marketing network of retail
-                outlets, LPG distributors, aviation stations, lubricant plants and
-                cross&#8209;country pipelines.
+                It runs a nationwide downstream energy business &mdash; refineries at
+                Mumbai and Visakhapatnam, joint&#8209;venture refineries at Bathinda and
+                Pachpadra, and a vast marketing network of retail outlets, LPG
+                distributors, aviation stations, lubricant plants and pipelines.
               </p>
               <p>
-                Petrochemicals are a strategic growth vector: by integrating cracker
-                and derivative units with existing refineries, HPCL raises the value
-                captured from every barrel while supporting India's push for
-                self&#8209;reliance in polymers and chemicals.
+                Petrochemicals are a strategic growth vector: integrating cracker and
+                derivative units with existing refineries lifts the value captured
+                per barrel and supports India&rsquo;s drive for self&#8209;reliance in
+                polymers and chemicals.
               </p>
               <dl class="hpx-about__facts">
                 <div><dt>Status</dt><dd>Maharatna PSU</dd></div>
@@ -612,275 +357,260 @@
         <div class="hpx-card">
           <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-factory"/></svg></span>
           <h3>Refinery&#8209;integrated</h3>
-          <p>Cracker and derivative units built into HPCL refineries, converting our own naphtha, off&#8209;gas and propylene into higher&#8209;value products.</p>
+          <p>The petrochemical complex shares feedstock, utilities and infrastructure with the 9&nbsp;MMTPA HRRL refinery at Pachpadra.</p>
         </div>
         <div class="hpx-card">
           <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-flask"/></svg></span>
-          <h3>Full&#8209;slate portfolio</h3>
-          <p>Polyethylene, polypropylene, MEG, butene&#8209;1 and aromatics such as benzene and toluene &mdash; feedstock for packaging, textiles, automotive and infrastructure.</p>
+          <h3>World&#8209;class technology</h3>
+          <p>Polyethylene on UNIPOL&trade; PE (Univation, USA) and polypropylene on Novolen&reg; gas&#8209;phase technology (Lummus Novolen, Germany).</p>
         </div>
         <div class="hpx-card">
           <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-shield"/></svg></span>
-          <h3>Reliable supply</h3>
-          <p>Backed by a Maharatna balance sheet, a nationwide pipeline and terminal network, and decades of hydrocarbon logistics experience.</p>
-        </div>
-        <div class="hpx-card">
-          <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-leaf"/></svg></span>
-          <h3>Built for the transition</h3>
-          <p>Energy&#8209;efficient crackers, water recycling, lower flaring and a roadmap toward circular and bio&#8209;based polymers.</p>
+          <h3>All application segments</h3>
+          <p>A polymer product portfolio designed to cater to every key application segment, from packaging and pipe to automotive and healthcare.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===================== PRODUCT PORTFOLIO ===================== -->
-  <div class="hpx__section" id="hpx-products">
+  <!-- ===================== HRRL COMPLEX ===================== -->
+  <div class="hpx__section" id="hpx-hrrl">
     <div class="hpx__wrap">
       <div class="hpx__head">
-        <span class="hpx__eyebrow">Product portfolio</span>
-        <h2 class="hpx__title">One integrated slate, three product families</h2>
-        <p class="hpx__lead">
-          From polyolefins for everyday packaging to aromatics that feed the wider
-          chemical industry. Grades and capacities reflect HPCL's publicly
-          disclosed project scope.
-        </p>
+        <span class="hpx__eyebrow">The complex</span>
+        <h2 class="hpx__title">HPCL Rajasthan Refinery Ltd. (HRRL)</h2>
       </div>
 
-      <div class="hpx-group">
-        <div class="hpx-group__label"><h3>Polymers</h3><span>Polyolefins for packaging, pipe, fibre &amp; moulded goods</span></div>
-        <div class="hpx-prod-grid">
-          <article class="hpx-prod">
-            <h4>Polypropylene</h4>
-            <p class="hpx-prod__code">PP &mdash; Homopolymer / RCP / ICP</p>
-            <p>Two gas&#8209;phase PP lines (~1,000 KTA combined) with the flexibility to swing between homopolymer, random copolymer and impact copolymer grades.</p>
-            <div class="hpx-prod__uses"><span class="hpx-chip">Rigid packaging</span><span class="hpx-chip">Woven sacks</span><span class="hpx-chip">Automotive compounds</span><span class="hpx-chip">Non&#8209;woven fabric</span></div>
-          </article>
-          <article class="hpx-prod">
-            <h4>Polyethylene</h4>
-            <p class="hpx-prod__code">HDPE / LLDPE (incl. mLLDPE)</p>
-            <p>Swing plants on UNIPOL&trade; PE technology producing HDPE and LLDPE &mdash; including metallocene LLDPE &mdash; across a broad density and melt&#8209;index range.</p>
-            <div class="hpx-prod__uses"><span class="hpx-chip">Films &amp; liners</span><span class="hpx-chip">Blow&#8209;moulded containers</span><span class="hpx-chip">Pressure pipe</span><span class="hpx-chip">Cable insulation</span></div>
-          </article>
-          <article class="hpx-prod">
-            <h4>Butene&#8209;1</h4>
-            <p class="hpx-prod__code">Comonomer grade</p>
-            <p>A dedicated butene&#8209;1 unit supplying high&#8209;purity comonomer for in&#8209;house polyethylene production and merchant sale.</p>
-            <div class="hpx-prod__uses"><span class="hpx-chip">PE comonomer</span><span class="hpx-chip">Specialty polymers</span><span class="hpx-chip">Chemical synthesis</span></div>
-          </article>
+      <div class="hpx-split" style="margin-top:1.75rem">
+        <div>
+          <p>
+            HRRL is a joint venture between <b>Hindustan Petroleum Corporation
+            Limited</b> and the <b>Government of Rajasthan</b>, with equity
+            participation of <b>74%</b> and <b>26%</b> respectively.
+          </p>
+          <p>
+            The project sets up a greenfield <b>9&nbsp;MMTPA refinery&#8209;cum&#8209;petrochemical
+            complex</b> &mdash; including <b>2.4&nbsp;MMTPA of petrochemical products</b>
+            &mdash; at <b>Pachpadra, in the Balotra district of Rajasthan</b>.
+          </p>
+          <p>
+            The complex carries the highest petrochemical intensity of any Indian
+            refinery and is built for world&#8209;scale, energy&#8209;efficient operation with
+            a strong local&#8209;content and Atmanirbhar Bharat focus.
+          </p>
+        </div>
+        <div class="hpx-split__media">
+          <span>Refinery&#8209;cum&#8209;petrochemical complex under construction<br>&mdash; Pachpadra, Rajasthan<br><small>(image placeholder)</small></span>
         </div>
       </div>
 
-      <div class="hpx-group">
-        <div class="hpx-group__label"><h3>Chemical intermediates</h3><span>Glycols &amp; derivatives for polyester, coolant &amp; industry</span></div>
-        <div class="hpx-prod-grid">
-          <article class="hpx-prod">
-            <h4>Mono&#8209;Ethylene Glycol</h4>
-            <p class="hpx-prod__code">MEG</p>
-            <p>Ethylene&#8209;derived MEG for the polyester value chain, with di&#8209; and tri&#8209;ethylene glycol as co&#8209;products.</p>
-            <div class="hpx-prod__uses"><span class="hpx-chip">PET resin &amp; fibre</span><span class="hpx-chip">Engine coolant</span><span class="hpx-chip">Heat&#8209;transfer fluids</span></div>
-          </article>
-          <article class="hpx-prod">
-            <h4>Butadiene</h4>
-            <p class="hpx-prod__code">1,3&#8209;Butadiene</p>
-            <p>Extracted from the mixed C4 stream of the cracker for synthetic&#8209;rubber and resin manufacturers.</p>
-            <div class="hpx-prod__uses"><span class="hpx-chip">Synthetic rubber</span><span class="hpx-chip">ABS resins</span><span class="hpx-chip">Nylon intermediates</span></div>
-          </article>
-        </div>
-      </div>
-
-      <div class="hpx-group">
-        <div class="hpx-group__label"><h3>Aromatics</h3><span>BTX building blocks for resins, fibres &amp; solvents</span></div>
-        <div class="hpx-prod-grid">
-          <article class="hpx-prod">
-            <h4>Benzene</h4>
-            <p class="hpx-prod__code">Industrial grade</p>
-            <p>Recovered from reformate and pyrolysis gasoline as a precursor for a wide range of downstream chemicals.</p>
-            <div class="hpx-prod__uses"><span class="hpx-chip">Styrene / polystyrene</span><span class="hpx-chip">Phenol &amp; acetone</span><span class="hpx-chip">Caprolactam</span></div>
-          </article>
-          <article class="hpx-prod">
-            <h4>Toluene</h4>
-            <p class="hpx-prod__code">Nitration &amp; commercial grade</p>
-            <p>High&#8209;purity toluene for solvent, adhesive and downstream chemical applications.</p>
-            <div class="hpx-prod__uses"><span class="hpx-chip">Coatings solvent</span><span class="hpx-chip">TDI for polyurethanes</span><span class="hpx-chip">Octane blending</span></div>
-          </article>
-        </div>
+      <h3 style="margin-top:2.5rem;font-size:1.05rem">Uniqueness of the HRRL project</h3>
+      <div class="hpx-ustats">
+        <div class="hpx-ustat"><b>26%</b><span>Highest petrochemical intensity among Indian refineries</span></div>
+        <div class="hpx-ustat"><b>Nelson 17</b><span>2nd&#8209;highest Nelson complexity among Indian refineries</span></div>
+        <div class="hpx-ustat"><b>EII 78</b><span>Quartile&#8209;1 energy performance on the international benchmark</span></div>
+        <div class="hpx-ustat"><b>2 &times; 500 KTPA</b><span>World&#8209;scale capacity swing&#8209;unit train</span></div>
+        <div class="hpx-ustat"><b>2 &times; 490 KTPA</b><span>Largest&#8209;capacity polypropylene (PPU) train</span></div>
+        <div class="hpx-ustat"><b>85%+</b><span>Local component &mdash; focus on Atmanirbhar Bharat</span></div>
       </div>
     </div>
   </div>
 
-  <!-- ===================== COMPLEXES ===================== -->
-  <div class="hpx__section hpx__section--alt" id="hpx-complexes">
+  <!-- ===================== LOGISTICS / CONNECTIONS ===================== -->
+  <div class="hpx__section hpx__section--alt" id="hpx-connections">
     <div class="hpx__wrap">
       <div class="hpx__head">
-        <span class="hpx__eyebrow">Complexes &amp; operations</span>
-        <h2 class="hpx__title">Where HP Petrochemicals is being built</h2>
-        <p class="hpx__lead">
-          Two integrated complexes anchor the business, supported by a dedicated
-          polymer marketing and technical&#8209;service organisation.
-        </p>
+        <span class="hpx__eyebrow">Thrive with the right connections</span>
+        <h2 class="hpx__title">A strategically located complex</h2>
+        <p class="hpx__lead">HRRL&rsquo;s position gives it a range of transportation and logistics advantages.</p>
       </div>
-      <div class="hpx-grid">
-        <div class="hpx-card hpx-complex">
-          <span class="hpx-badge hpx-badge--soon">Under commissioning</span>
-          <h3>Rajasthan Refinery &mdash; dual&#8209;feed cracker &amp; petrochemical complex</h3>
-          <p class="hpx-complex__loc"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-pin"/></svg> Pachpadra, Barmer, Rajasthan</p>
-          <p>A 9 MMTPA refinery integrated with a dual&#8209;feed (naphtha + gas) cracker, designed to yield about 2.4 MMTPA of petrochemicals.</p>
-          <ul>
-            <li>~1,000 KTA polyethylene (HDPE + LLDPE swing plants)</li>
-            <li>~1,000 KTA polypropylene (two gas&#8209;phase lines)</li>
-            <li>BTX aromatics recovery &amp; butadiene extraction</li>
-            <li>A 50:50 JV &mdash; HPCL Rajasthan Refinery Ltd (HRRL)</li>
-          </ul>
+
+      <div class="hpx-conn" style="margin-top:2rem">
+        <div class="hpx-conn__list">
+          <div class="hpx-conn__item">
+            <b>Major transport networks.</b>
+            <p>Well connected to road and rail for efficient, cost&#8209;effective movement &mdash; shorter transit times and lower logistics cost.</p>
+          </div>
+          <div class="hpx-conn__item">
+            <b>Connectivity to major cities.</b>
+            <p>Close to Jodhpur, Jaipur, Udaipur, Delhi, Ahmedabad, Daman, Indore and Mumbai.</p>
+          </div>
+          <div class="hpx-conn__item">
+            <b>Amritsar&ndash;Jamnagar Expressway.</b>
+            <p>A 1,400&nbsp;km, 6&#8209;lane corridor &mdash; about 500&nbsp;km through Rajasthan &mdash; forming the logistics lifeline of the region.</p>
+          </div>
+          <div class="hpx-conn__item">
+            <b>Proximity to ports.</b>
+            <p>Mundra, the nearest port, is roughly 500&nbsp;km away; Kandla is also within reach for coastal and export movement.</p>
+          </div>
         </div>
-        <div class="hpx-card hpx-complex">
-          <span class="hpx-badge hpx-badge--soon">Development</span>
-          <h3>Visakh Refinery petrochemical project</h3>
-          <p class="hpx-complex__loc"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-pin"/></svg> Visakhapatnam, Andhra Pradesh</p>
-          <p>A propylene&#8209;derivative project on the modernised Visakh refinery, turning refinery&#8209;grade propylene into polypropylene and downstream chemicals for eastern and southern markets.</p>
-          <ul>
-            <li>Refinery FCC propylene as feedstock</li>
-            <li>Polypropylene and specialty derivatives</li>
-            <li>Coastal logistics for movement &amp; export</li>
-            <li>Serves fast&#8209;growing southern India demand</li>
-          </ul>
-        </div>
-        <div class="hpx-card hpx-complex">
-          <span class="hpx-badge hpx-badge--live">Operating</span>
-          <h3>Marketing, logistics &amp; customer solutions</h3>
-          <p class="hpx-complex__loc"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-truck"/></svg> Pan&#8209;India</p>
-          <p>A dedicated polymer marketing organisation, technical&#8209;service labs and a distributor network reaching converters across every region.</p>
-          <ul>
-            <li>Application&#8209;development &amp; grade&#8209;selection support</li>
-            <li>Bagged and bulk despatch options</li>
-            <li>Digital order &amp; dispatch tracking</li>
-            <li>Rides HPCL's existing pipeline, rail and road network</li>
-          </ul>
+
+        <div class="hpx-hub" role="img" aria-label="Diagram: HRRL at Pachpadra connected to Delhi, Jaipur, Ahmedabad, Indore, Vapi, Mumbai and the ports of Mundra and Kandla.">
+          <svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg">
+            <g stroke="#c3d3e4" stroke-width="2">
+              <line x1="260" y1="170" x2="400" y2="52"/>
+              <line x1="260" y1="170" x2="470" y2="150"/>
+              <line x1="260" y1="170" x2="452" y2="258"/>
+              <line x1="260" y1="170" x2="330" y2="300"/>
+              <line x1="260" y1="170" x2="190" y2="300"/>
+              <line x1="260" y1="170" x2="120" y2="250"/>
+              <line x1="260" y1="170" x2="70" y2="175"/>
+              <line x1="260" y1="170" x2="70" y2="110"/>
+            </g>
+            <!-- destination nodes -->
+            <g font-family="Montserrat, sans-serif" font-size="12" font-weight="600" fill="#001344">
+              <circle cx="400" cy="52" r="7" fill="#df1a14"/><text x="412" y="56">Delhi</text>
+              <circle cx="470" cy="150" r="6" fill="#005095"/><text x="470" y="138" text-anchor="middle">Jaipur</text>
+              <circle cx="452" cy="258" r="6" fill="#005095"/><text x="452" y="278" text-anchor="middle">Indore</text>
+              <circle cx="330" cy="300" r="6" fill="#005095"/><text x="330" y="320" text-anchor="middle">Ahmedabad</text>
+              <circle cx="190" cy="300" r="6" fill="#005095"/><text x="190" y="320" text-anchor="middle">Vapi</text>
+              <circle cx="120" cy="250" r="7" fill="#df1a14"/><text x="120" y="270" text-anchor="middle">Mumbai</text>
+              <circle cx="70" cy="175" r="6" fill="#f6871f"/><text x="70" y="197" text-anchor="middle">Mundra Port</text>
+              <circle cx="70" cy="110" r="6" fill="#f6871f"/><text x="70" y="98" text-anchor="middle">Kandla Port</text>
+            </g>
+            <!-- HRRL hub -->
+            <circle cx="260" cy="170" r="34" fill="#001344"/>
+            <circle cx="260" cy="170" r="34" fill="none" stroke="#df1a14" stroke-width="2"/>
+            <text x="260" y="166" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="13" font-weight="800" fill="#ffffff">HRRL</text>
+            <text x="260" y="182" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="9" fill="#9fc4e6">Pachpadra</text>
+          </svg>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===================== APPLICATIONS ===================== -->
-  <div class="hpx__section" id="hpx-applications">
+  <!-- ===================== HP DURAPOL POLYMERS ===================== -->
+  <div class="hpx__section" id="hpx-polymers">
     <div class="hpx__wrap">
       <div class="hpx__head">
-        <span class="hpx__eyebrow">Applications</span>
-        <h2 class="hpx__title">Materials for the everyday economy</h2>
+        <span class="hpx__eyebrow">HP Durapol&reg; &mdash; polyethylene &amp; polypropylene</span>
+        <h2 class="hpx__title">A full polymer slate on the world&rsquo;s best technologies</h2>
         <p class="hpx__lead">
-          HP Petrochemicals grades are engineered for the sectors that carry
-          India's growth.
+          The dual&#8209;feed cracker yields 2.4&nbsp;MMTPA of petrochemicals &mdash;
+          polyethylene (HDPE &amp; LLDPE), polypropylene (PPHP, ICP &amp; RCP) and the
+          co&#8209;products benzene, toluene and butadiene. Two 1,000&nbsp;KTA polymer trains
+          bring HDPE, LLDPE and PP grades to converters across every segment.
         </p>
       </div>
-      <div class="hpx-grid">
-        <div class="hpx-card">
-          <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-box"/></svg></span>
-          <h3>Packaging &amp; FMCG</h3>
-          <p>Lightweight, food&#8209;safe films, caps, closures and rigid containers that cut material use while protecting shelf life.</p>
+
+      <div class="hpx-specs">
+        <div class="hpx-spec">
+          <div class="hpx-spec__head">Swing units &mdash; HDPE / LLDPE</div>
+          <div class="hpx-spec__body">
+            <dl>
+              <dt>Licensor</dt><dd>Univation Technologies, USA</dd>
+              <dt>Technology</dt><dd>UNIPOL&trade; PE, gas phase</dd>
+              <dt>Capacity</dt><dd>2 &times; 500 KTA (1,000 KTA combined)</dd>
+            </dl>
+            <ul>
+              <li>Wide range of PE grades, including metallocene LLDPE</li>
+              <li>PE100 pressure&#8209;pipe capability</li>
+              <li>LBM grade production flexibility</li>
+            </ul>
+          </div>
         </div>
-        <div class="hpx-card">
-          <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-drop"/></svg></span>
-          <h3>Water &amp; infrastructure</h3>
-          <p>Corrosion&#8209;free pressure pipe, drainage systems and geomembranes for irrigation, gas and city water networks.</p>
+        <div class="hpx-spec">
+          <div class="hpx-spec__head">Polypropylene (PP) units</div>
+          <div class="hpx-spec__body">
+            <dl>
+              <dt>Licensor</dt><dd>Lummus Novolen Tech GmbH, Germany</dd>
+              <dt>Technology</dt><dd>Novolen&reg; gas&#8209;phase PP</dd>
+              <dt>Capacity</dt><dd>2 &times; 500 KTA (1,000 KTA combined)</dd>
+            </dl>
+            <ul>
+              <li>PP homopolymer production</li>
+              <li>Random copolymer capability</li>
+              <li>Impact copolymer manufacturing</li>
+            </ul>
+          </div>
         </div>
-        <div class="hpx-card">
-          <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-truck"/></svg></span>
-          <h3>Automotive &amp; mobility</h3>
-          <p>Impact&#8209;copolymer compounds for bumpers, battery trays and under&#8209;the&#8209;hood parts that reduce vehicle weight.</p>
+      </div>
+
+      <!-- polymer taxonomy -->
+      <div class="hpx-tree" aria-label="Polymer portfolio: Polyethylene (HDPE, LLDPE) and Polypropylene (Homopolymer, Impact Copolymer, Random Copolymer)">
+        <div class="hpx-tree__root">POLYMERS</div>
+        <div class="hpx-tree__rail"></div>
+        <div class="hpx-tree__branches">
+          <div class="hpx-tree__branch">
+            <div class="hpx-tree__l1">Polyethylene</div>
+            <div class="hpx-tree__leaves">
+              <div class="hpx-tree__leaf"><b>HDPE</b> &mdash; high&#8209;density polyethylene</div>
+              <div class="hpx-tree__leaf"><b>LLDPE</b> &mdash; linear low&#8209;density polyethylene</div>
+            </div>
+          </div>
+          <div class="hpx-tree__branch">
+            <div class="hpx-tree__l1">Polypropylene</div>
+            <div class="hpx-tree__leaves">
+              <div class="hpx-tree__leaf"><b>Homopolymer</b> (PPHP)</div>
+              <div class="hpx-tree__leaf"><b>Impact copolymer</b> (ICP)</div>
+              <div class="hpx-tree__leaf"><b>Random copolymer</b> (RCP)</div>
+            </div>
+          </div>
         </div>
-        <div class="hpx-card">
-          <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-layers"/></svg></span>
-          <h3>Textiles &amp; fibre</h3>
-          <p>MEG and polyester intermediates plus PP staple fibre for apparel, home textiles and technical non&#8209;wovens.</p>
-        </div>
-        <div class="hpx-card">
-          <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-wind"/></svg></span>
-          <h3>Agriculture</h3>
-          <p>Mulch and greenhouse film, woven sacks and crop&#8209;protection packaging engineered for Indian field conditions.</p>
-        </div>
-        <div class="hpx-card">
-          <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-spark"/></svg></span>
-          <h3>Consumer &amp; healthcare</h3>
-          <p>Clarified random&#8209;copolymer for housewares and medical devices that need clarity, sterilisability and toughness.</p>
-        </div>
+      </div>
+
+      <h3 style="margin-top:2.5rem;font-size:1.05rem">Serving all key application segments</h3>
+      <div class="hpx-segs">
+        <span class="hpx-seg"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-box"/></svg>Packaging &amp; films</span>
+        <span class="hpx-seg"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-drop"/></svg>Pipe &amp; infrastructure</span>
+        <span class="hpx-seg"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-truck"/></svg>Automotive</span>
+        <span class="hpx-seg"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-leaf"/></svg>Agriculture &amp; raffia</span>
+        <span class="hpx-seg"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-layers"/></svg>Fibre &amp; non&#8209;wovens</span>
+        <span class="hpx-seg"><svg width="15" height="15" viewBox="0 0 24 24"><use href="#hpx-i-spark"/></svg>Consumer &amp; healthcare</span>
       </div>
     </div>
   </div>
 
-  <!-- ===================== SUSTAINABILITY ===================== -->
-  <div class="hpx__section" id="hpx-sustainability">
-    <div class="hpx__wrap">
-      <div class="hpx-dark">
-        <span class="hpx__eyebrow hpx__eyebrow--light">Sustainability</span>
-        <h2 class="hpx__title" style="color:#fff">Growth that respects its footprint</h2>
-        <p class="hpx__lead">
-          The complexes are engineered to high environmental standards, and the
-          product roadmap is moving toward circular and lower&#8209;carbon polymers.
-        </p>
-        <div class="hpx-grid">
-          <div class="hpx-tile">
-            <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-recycle"/></svg></span>
-            <h3>Circularity roadmap</h3>
-            <p>Design&#8209;for&#8209;recycling grades, mono&#8209;material structures and participation in India's EPR framework for plastics.</p>
-          </div>
-          <div class="hpx-tile">
-            <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-drop"/></svg></span>
-            <h3>Water stewardship</h3>
-            <p>Zero&#8209;liquid&#8209;discharge philosophy, treated&#8209;effluent reuse and rainwater harvesting &mdash; critical in a water&#8209;scarce region.</p>
-          </div>
-          <div class="hpx-tile">
-            <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-wind"/></svg></span>
-            <h3>Lower&#8209;carbon operations</h3>
-            <p>High&#8209;efficiency furnaces, flare&#8209;gas recovery, renewable power sourcing and a green&#8209;hydrogen evaluation for process heat.</p>
-          </div>
-          <div class="hpx-tile">
-            <span class="hpx-card__icon"><svg width="22" height="22" viewBox="0 0 24 24"><use href="#hpx-i-leaf"/></svg></span>
-            <h3>Community &amp; biodiversity</h3>
-            <p>Skill development, local employment and green&#8209;belt afforestation around plant sites under HPCL's CSR programme.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================== CONTACT CTA ===================== -->
+  <!-- ===================== CONTACT ===================== -->
   <div class="hpx__section hpx__section--alt" id="hpx-contact">
     <div class="hpx__wrap">
-      <div class="hpx-cta">
-        <div class="hpx-cta__main">
-          <span class="hpx__eyebrow hpx__eyebrow--light">Contact</span>
-          <h2>Talk to the petrochemicals team</h2>
-          <p>
-            Converters, distributors and institutional buyers can register interest
-            for grade information, samples and supply agreements ahead of
-            commercial start&#8209;up.
-          </p>
-          <div class="hpx-hero__actions">
-            <a class="hpx-btn hpx-btn--accent" href="/contactus">
-              Register interest
-              <svg width="16" height="16" viewBox="0 0 24 24"><use href="#hpx-i-arrow"/></svg>
-            </a>
-            <a class="hpx-btn hpx-btn--ghost" href="/pages/Complaints-and-Feedback">Complaints &amp; feedback</a>
+      <div class="hpx__head">
+        <span class="hpx__eyebrow">Contact us</span>
+        <h2 class="hpx__title">Petrochemical marketing</h2>
+      </div>
+
+      <div class="hpx-offices">
+        <div class="hpx-office hpx-office--lead">
+          <h3>Petrochemical Marketing Headquarter</h3>
+          <address class="hpx-office__addr">
+            Hindustan Petroleum Corporation Ltd.<br>
+            Priyadarshini Building, 7th Floor, Petrochemicals Marketing,<br>
+            Off Eastern Express Highway, Sion, Mumbai&nbsp;&ndash;&nbsp;400022
+          </address>
+          <div class="hpx-office__meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px"><use href="#hpx-i-mail"/></svg> <a href="mailto:Petrochemical.Marketing@hpcl.in">Petrochemical.Marketing@hpcl.in</a></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px"><use href="#hpx-i-phone"/></svg> <a href="tel:+912224068297">022&#8209;24068297</a></span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px"><use href="#hpx-i-globe"/></svg> <a href="https://www.hindustanpetroleum.com">www.hindustanpetroleum.com</a></span>
           </div>
         </div>
-        <div class="hpx-cta__aside">
-          <div class="hpx-cta__row">
-            <span class="hpx-card__icon"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#hpx-i-mail"/></svg></span>
-            <span><b>Polymer marketing</b><span>Via the corporate Contact Us desk</span></span>
+
+        <div class="hpx-office">
+          <h3>HPCL Mumbai Petrochemical Regional Office</h3>
+          <address class="hpx-office__addr">
+            3/4, S.V. Road &amp; Turner Road Junction,<br>
+            Bandra (West), Mumbai&nbsp;&ndash;&nbsp;400050
+          </address>
+          <div class="hpx-office__meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px"><use href="#hpx-i-phone"/></svg> <a href="tel:+919990408866">+91&#8209;9990408866</a></span>
           </div>
-          <div class="hpx-cta__row">
-            <span class="hpx-card__icon"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#hpx-i-phone"/></svg></span>
-            <span><b>Emergency helpline</b><span>Dial 1906</span></span>
-          </div>
-          <div class="hpx-cta__row">
-            <span class="hpx-card__icon"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#hpx-i-building"/></svg></span>
-            <span><b>Registered office</b><span>Petroleum House, 17 Jamshedji Tata Road, Mumbai</span></span>
+        </div>
+
+        <div class="hpx-office">
+          <h3>HPCL Ahmedabad Petrochemical Regional Office</h3>
+          <address class="hpx-office__addr">
+            Petroleum House, Behind Memnagar Fire Station,<br>
+            Navrangpura, Ahmedabad&nbsp;&ndash;&nbsp;380009
+          </address>
+          <div class="hpx-office__meta">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px"><use href="#hpx-i-phone"/></svg> <a href="tel:+917070990307">+91&#8209;7070990307</a></span>
           </div>
         </div>
       </div>
 
       <p class="hpx__disclaimer">
-        Concept redesign of the HP Petrochemicals page &mdash; layout and copy for
-        demonstration. Figures paraphrased from public HPCL project disclosures.
+        Concept redesign of the HP Petrochemicals / HP Durapol page &mdash; layout
+        for demonstration. Content reflects publicly stated HPCL / HRRL project
+        details; verify figures before publishing.
       </p>
     </div>
   </div>
@@ -894,11 +624,9 @@
       if (!about) return;
       var btn = about.querySelector(".hpx-about__toggle");
       var panel = about.querySelector(".hpx-about__panel");
-
       about.classList.add("is-collapsed");
       btn.setAttribute("aria-expanded", "false");
       panel.setAttribute("aria-hidden", "true");
-
       btn.addEventListener("click", function () {
         var isOpen = !about.classList.toggle("is-collapsed");
         btn.setAttribute("aria-expanded", String(isOpen));
@@ -907,4 +635,4 @@
     })();
   </script>
 </section>
-<!-- ===================== END HP PETROCHEMICALS BLOCK ===================== -->
+<!-- ===================== END HP DURAPOL / HP PETROCHEMICALS BLOCK ===================== -->
