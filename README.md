@@ -25,9 +25,10 @@ into the HTML content area of the `/hp-petrochemicals` page.
 
 | File | Used for |
 | --- | --- |
-| `hp-durapol-logo.svg` | hero logo (placeholder - drop in the official file) |
+| `hp-durapol-logo.png` | hero logo |
 | `durapol-1..5.jpg` | hero carousel |
 | `refinery-1..3.jpg` | HRRL section carousel |
+| `refinery-map.png` | "Thrive with the right connections" map |
 
 When embedding on the live site, repoint each `src` to an absolute path
 (e.g. `/images/durapol/slide-1.jpg`) and update the `alt` text.
@@ -35,9 +36,9 @@ When embedding on the live site, repoint each `src` to an absolute path
 ## Sections
 
 Hero (logo + stat strip + campaign carousel) -> About HP Petrochemicals (with
-the expandable *About Hindustan Petroleum* panel) -> HRRL (JV intro + photo
-carousel + six "uniqueness" stats) -> Thrive with the right connections
-(logistics + hub diagram) -> HP Durapol polymers (licensor spec cards + product
+the expandable *About Hindustan Petroleum* panel) -> HRRL (image carousel +
+heading/text + six "uniqueness" stats) -> Thrive with the right connections
+(logistics + map) -> HP Durapol polymers (licensor spec cards + product
 taxonomy, incl. benzene / toluene / butadiene) -> Contact offices.
 
 ## Preview
@@ -51,17 +52,3 @@ python3 -m http.server -d embed 8000   # then open http://localhost:8000/preview
 
 GitHub Pages publishes the same preview at the repo's Pages URL
 (see `.github/workflows/deploy.yml`).
-
-## Send it as a single file (email / offline)
-
-`embed/hp-petrochemicals-standalone.html` is one self-contained file - the block
-wrapped in a full HTML document with every image inlined as a `data:` URI. No
-server, no other files: the recipient double-clicks it and it opens in the
-browser. (Only the Montserrat webfont needs internet; there is a system-font
-fallback.)
-
-Regenerate it after any change to the block or images:
-
-```bash
-python3 embed/build-standalone.py
-```
