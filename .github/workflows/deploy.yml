@@ -27,6 +27,7 @@ jobs:
           mkdir -p _site
           cp -r embed/* _site/
           cp embed/preview.html _site/index.html
+          rm -f _site/build-standalone.py
       - uses: actions/configure-pages@v5
         with:
           enablement: true

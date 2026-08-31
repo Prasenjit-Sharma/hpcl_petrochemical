@@ -51,3 +51,17 @@ python3 -m http.server -d embed 8000   # then open http://localhost:8000/preview
 
 GitHub Pages publishes the same preview at the repo's Pages URL
 (see `.github/workflows/deploy.yml`).
+
+## Send it as a single file (email / offline)
+
+`embed/hp-petrochemicals-standalone.html` is one self-contained file - the block
+wrapped in a full HTML document with every image inlined as a `data:` URI. No
+server, no other files: the recipient double-clicks it and it opens in the
+browser. (Only the Montserrat webfont needs internet; there is a system-font
+fallback.)
+
+Regenerate it after any change to the block or images:
+
+```bash
+python3 embed/build-standalone.py
+```
