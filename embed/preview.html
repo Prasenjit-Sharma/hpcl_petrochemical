@@ -80,7 +80,8 @@
 
   <script>
     // Pull in the fragment and run its inline <script> (innerHTML won't execute it).
-    fetch("./hp-petrochemicals.html")
+    // Cache-bust so the preview always reflects the latest deployed block.
+    fetch("./hp-petrochemicals.html?v=" + Date.now(), { cache: "no-store" })
       .then(function (r) { return r.text(); })
       .then(function (html) {
         var mount = document.getElementById("mount");
