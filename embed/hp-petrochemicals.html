@@ -172,6 +172,12 @@
     .hpx-about__facts dt { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: var(--hpx-blue); font-weight: 600; }
     .hpx-about__facts dd { font-size: .85rem; font-weight: 600; color: var(--hpx-navy); }
     .hpx-about__more { margin-top: 1rem; display: inline-flex; align-items: center; gap: .35rem; font-size: .8rem; font-weight: 600; }
+    .hpx-about__subhead { margin-top: 1.3rem; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: var(--hpx-blue); }
+    .hpx-about__subhead + p { margin-top: .45rem; }
+    .hpx-about__stats { margin-top: .7rem; display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .hpx-about__stat { border: 1px solid rgba(0, 80, 149, .18); border-left: 3px solid var(--hpx-red); border-radius: 8px; padding: .55rem .7rem; background: #fff; }
+    .hpx-about__stat b { display: block; font-size: .95rem; font-weight: 800; color: var(--hpx-navy); }
+    .hpx-about__stat span { display: block; margin-top: .1rem; font-size: .68rem; line-height: 1.35; color: var(--hpx-muted); }
 
     /* ---- generic card grid ----------------------------------------------- */
     .hpx-grid { margin-top: 2.25rem; display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
@@ -370,7 +376,7 @@
           <span class="hpx-about__icon"><svg width="20" height="20" viewBox="0 0 24 24"><use href="#hpx-i-building"/></svg></span>
           <span class="hpx-about__label">
             <b>About Hindustan Petroleum</b>
-            <span>Maharatna PSU &middot; Fortune Global 500 &middot; parent company</span>
+            <span>Maharatna CPSE &middot; formed 15 July 1974</span>
           </span>
           <span class="hpx-about__plus" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -380,32 +386,51 @@
           <div class="hpx-about__panel" id="hpx-about-panel" role="region" aria-label="About Hindustan Petroleum">
             <div class="hpx-about__inner">
               <p>
-                Hindustan Petroleum Corporation Limited (HPCL) is a Maharatna Central
-                Public Sector Enterprise and a Fortune Global 500 company, majority
-                owned through Oil and Natural Gas Corporation (ONGC).
+                Hindustan Petroleum Corporation Limited (HPCL) was formed on
+                <strong>15 July 1974</strong>. It is a <strong>Maharatna</strong>
+                Central Public Sector Enterprise (CPSE), with annual gross sales of
+                <strong>&#8377;4,64,247 crore</strong> during 2024&#8209;25.
               </p>
+
+              <p class="hpx-about__subhead">Performance &mdash; 2024&#8209;25 (record)</p>
+              <div class="hpx-about__stats">
+                <div class="hpx-about__stat"><b>49.82 MMT</b><span>Sales</span></div>
+                <div class="hpx-about__stat"><b>25.27 MMT</b><span>Crude processing &mdash; 109% capacity utilisation</span></div>
+                <div class="hpx-about__stat"><b>26.9 MMT</b><span>Pipeline throughput</span></div>
+                <div class="hpx-about__stat"><b>~20.5%</b><span>Domestic petroleum&#8209;products market share</span></div>
+                <div class="hpx-about__stat"><b>&#8377;7,365 crore</b><span>Standalone PAT</span></div>
+              </div>
+
+              <p class="hpx-about__subhead">Refineries &amp; holdings</p>
               <p>
-                It runs a nationwide downstream energy business &mdash; refineries at
-                Mumbai and Visakhapatnam, joint&#8209;venture refineries at Bathinda and
-                Pachpadra, and a vast marketing network of retail outlets, LPG
-                distributors, aviation stations, lubricant plants and pipelines.
+                HPCL operates refineries in <strong>Mumbai (9.5 MMTPA)</strong> and
+                <strong>Visakhapatnam (15 MMTPA)</strong>, India&rsquo;s largest Lube
+                Refinery, and holds stakes in <strong>HMEL (48.99%)</strong> and
+                <strong>MRPL (16.96%)</strong>.
               </p>
+
+              <p class="hpx-about__subhead">Marketing network</p>
               <p>
-                Petrochemicals are a strategic growth vector: integrating cracker and
-                derivative units with existing refineries lifts the value captured
-                per barrel and supports India&rsquo;s drive for self&#8209;reliance in
-                polymers and chemicals.
+                The marketing network includes <strong>145 Regional Offices</strong>,
+                supported by terminals, depots, LPG plants, aviation stations and
+                lube facilities.
               </p>
-              <dl class="hpx-about__facts">
-                <div><dt>Status</dt><dd>Maharatna PSU</dd></div>
-                <div><dt>Sector</dt><dd>Integrated downstream energy</dd></div>
-                <div><dt>Refineries</dt><dd>Mumbai &middot; Visakh &middot; JV: Bathinda, Pachpadra</dd></div>
-                <div><dt>Listing</dt><dd>BSE &middot; NSE (subsidiary of ONGC)</dd></div>
-              </dl>
-              <a class="hpx-about__more" href="https://www.hindustanpetroleum.com" target="_blank" rel="noopener">
-                Visit hindustanpetroleum.com
-                <svg width="14" height="14" viewBox="0 0 24 24"><use href="#hpx-i-arrow"/></svg>
-              </a>
+              <div class="hpx-about__stats">
+                <div class="hpx-about__stat"><b>23,747</b><span>Retail Outlets</span></div>
+                <div class="hpx-about__stat"><b>1,638</b><span>SKO/LDO dealers</span></div>
+                <div class="hpx-about__stat"><b>551</b><span>Lube distributors</span></div>
+                <div class="hpx-about__stat"><b>2,038</b><span>CNG facilities at Retail Outlets</span></div>
+                <div class="hpx-about__stat"><b>5,976</b><span>EV Charging Stations</span></div>
+                <div class="hpx-about__stat"><b>875</b><span>Door&#8209;to&#8209;door delivery dispensers</span></div>
+                <div class="hpx-about__stat"><b>6,378</b><span>LPG Distributorships</span></div>
+                <div class="hpx-about__stat"><b>9.7 crore</b><span>LPG consumers</span></div>
+              </div>
+
+              <p style="margin-top:1.15rem">
+                HPCL also operates India&rsquo;s <strong>second&#8209;largest petroleum
+                pipeline network (5,134 km)</strong> and has <strong>21 JV and
+                subsidiary companies</strong> across the oil &amp; gas value chain.
+              </p>
             </div>
           </div>
         </div>
