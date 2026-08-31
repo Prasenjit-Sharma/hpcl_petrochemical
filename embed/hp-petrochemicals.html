@@ -22,7 +22,7 @@
      • The "HP Durapol" wordmark below is a plain text lockup placeholder —
        replace it with the official logo asset.
      ========================================================================= -->
-<section class="hpx" aria-label="HP Petrochemicals — HP Durapol">
+<section class="hpx" lang="en" aria-label="HP Petrochemicals — HP Durapol">
   <style>
     /* ---- tokens + reset ------------------------------------------------- */
     .hpx {
@@ -55,6 +55,8 @@
       line-height: 1.2; font-weight: 700; letter-spacing: -.01em;
     }
     .hpx p { margin: 0; }
+    /* justify running text across the block (headings / labels stay as-is) */
+    .hpx p, .hpx li, .hpx address, .hpx dd { text-align: justify; text-justify: inter-word; hyphens: auto; }
     .hpx a { color: var(--hpx-blue); text-decoration: none; }
     .hpx a:hover { text-decoration: underline; }
     .hpx ul { margin: 0; padding: 0; list-style: none; }
@@ -204,7 +206,9 @@
     }
 
     /* ---- "uniqueness" stat cards --------------------------------------- */
-    .hpx-ustats { margin-top: 2rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); }
+    .hpx-ustats { margin-top: 2rem; display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 600px) { .hpx-ustats { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .hpx-ustats { grid-template-columns: repeat(3, 1fr); } }
     .hpx-ustat { border: 1px solid var(--hpx-line); border-left: 3px solid var(--hpx-red); border-radius: 10px; padding: 1.1rem 1.2rem; background: #fff; }
     .hpx-ustat b { display: block; font-size: 1.25rem; font-weight: 800; color: var(--hpx-navy); }
     .hpx-ustat span { display: block; margin-top: .25rem; font-size: .8rem; color: var(--hpx-muted); }
