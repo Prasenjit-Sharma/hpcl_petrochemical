@@ -305,6 +305,13 @@
     .hpx-carousel__btn:hover { background: #fff; transform: translateY(-50%) scale(1.1); }
     .hpx-carousel__dot:hover { background: rgba(255, 255, 255, .8); }
 
+    .hpx-stat { transition: background-color .18s ease; }
+    .hpx-stat:hover { background: rgba(255, 255, 255, .12); }
+    .hpx-stat b { transition: color .18s ease; }
+    .hpx-stat:hover b { color: #ff8a84; }
+    .hpx-stat:hover span { color: rgba(255, 255, 255, .85); }
+    .hpx-stat span { transition: color .18s ease; }
+
     @media (min-width: 760px) { .hpx-stats { grid-template-columns: repeat(4, 1fr); } }
     @media (prefers-reduced-motion: reduce) {
       .hpx *, .hpx *::before, .hpx *::after { transition: none !important; animation: none !important; }
