@@ -128,6 +128,7 @@
     .hpx-carousel__track { display: flex; transition: transform .5s ease; }
     .hpx-carousel__slide { position: relative; flex: 0 0 100%; margin: 0; min-width: 0; }
     .hpx-carousel__img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+    .hpx-carousel--portrait .hpx-carousel__img { aspect-ratio: 3 / 4; }
     .hpx-carousel__btn { position: absolute; top: 50%; transform: translateY(-50%); width: 2.4rem; height: 2.4rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); color: var(--hpx-navy); cursor: pointer; transition: background-color .15s ease; z-index: 3; }
     .hpx-carousel__btn:hover { background: #fff; }
     .hpx-carousel__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
@@ -460,7 +461,7 @@
   <div class="hpx__section" id="hpx-hrrl">
     <div class="hpx__wrap">
       <div class="hpx__head">
-        <span class="hpx__eyebrow">The complex</span>
+        <span class="hpx__eyebrow">Petrochemical Complex</span>
         <h2 class="hpx__title">HPCL Rajasthan Refinery Ltd. (HRRL)</h2>
       </div>
 
@@ -482,8 +483,30 @@
             a strong local&#8209;content and Atmanirbhar Bharat focus.
           </p>
         </div>
-        <div class="hpx-split__media">
-          <span>Refinery&#8209;cum&#8209;petrochemical complex under construction<br>&mdash; Pachpadra, Rajasthan<br><small>(image placeholder)</small></span>
+        <!-- Slide images: assets/refinery-1..3.jpg. Repoint src to absolute
+             paths when embedding on the live site; update the alt text. -->
+        <div class="hpx-carousel hpx-carousel--portrait" role="region" aria-roledescription="carousel"
+             aria-label="HRRL complex, Pachpadra" tabindex="0">
+          <div class="hpx-carousel__viewport">
+            <div class="hpx-carousel__track">
+              <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                <img class="hpx-carousel__img" src="assets/refinery-1.jpg" alt="HRRL refinery-cum-petrochemical complex at Pachpadra" />
+              </figure>
+              <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+                <img class="hpx-carousel__img" src="assets/refinery-2.jpg" alt="HRRL complex under construction, Pachpadra" />
+              </figure>
+              <figure class="hpx-carousel__slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+                <img class="hpx-carousel__img" src="assets/refinery-3.jpg" alt="HRRL complex, Barmer district, Rajasthan" />
+              </figure>
+            </div>
+          </div>
+          <button class="hpx-carousel__btn hpx-carousel__btn--prev" type="button" aria-label="Previous slide">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="hpx-carousel__btn hpx-carousel__btn--next" type="button" aria-label="Next slide">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="hpx-carousel__dots" role="tablist" aria-label="Choose slide"></div>
         </div>
       </div>
 
@@ -726,14 +749,15 @@
         });
       }
 
-      /* --- Slideshow carousel --- */
-      var car = scope.querySelector(".hpx-carousel");
-      if (car) {
+      /* --- Slideshow carousels (any number on the page) --- */
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      [].forEach.call(scope.querySelectorAll(".hpx-carousel"), function (car) {
         var track = car.querySelector(".hpx-carousel__track");
         var slides = [].slice.call(car.querySelectorAll(".hpx-carousel__slide"));
         var dotsWrap = car.querySelector(".hpx-carousel__dots");
+        if (!track || slides.length < 2) return;
         var idx = 0, timer = null;
-        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
         var dots = slides.map(function (_s, n) {
           var d = document.createElement("button");
@@ -741,7 +765,7 @@
           d.className = "hpx-carousel__dot";
           d.setAttribute("aria-label", "Go to slide " + (n + 1));
           d.addEventListener("click", function () { go(n); restart(); });
-          dotsWrap.appendChild(d);
+          if (dotsWrap) dotsWrap.appendChild(d);
           return d;
         });
 
@@ -757,8 +781,10 @@
         function stop() { if (timer) { clearInterval(timer); timer = null; } }
         function restart() { stop(); start(); }
 
-        car.querySelector(".hpx-carousel__btn--next").addEventListener("click", function () { next(); restart(); });
-        car.querySelector(".hpx-carousel__btn--prev").addEventListener("click", function () { prev(); restart(); });
+        var nextBtn = car.querySelector(".hpx-carousel__btn--next");
+        var prevBtn = car.querySelector(".hpx-carousel__btn--prev");
+        if (nextBtn) nextBtn.addEventListener("click", function () { next(); restart(); });
+        if (prevBtn) prevBtn.addEventListener("click", function () { prev(); restart(); });
         car.addEventListener("mouseenter", stop);
         car.addEventListener("mouseleave", start);
         car.addEventListener("focusin", stop);
@@ -778,7 +804,7 @@
 
         go(0);
         start();
-      }
+      });
     })();
   </script>
 </section>
