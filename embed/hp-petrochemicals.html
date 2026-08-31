@@ -1,30 +1,7 @@
-<!-- ============================================================================
-     HP DURAPOL  /  HP PETROCHEMICALS   —   page-body redesign (embeddable block)
-     ----------------------------------------------------------------------------
-     Paste this whole block into the HTML content area of the /hp-petrochemicals
-     page. It keeps the existing hindustanpetroleum.com header, mega-menu and
-     footer untouched, and follows the structure of the current page:
-       hero  ->  HRRL complex + "uniqueness" stats  ->  logistics / connections
-       ->  HP Durapol PE & PP (licensor specs + polymer taxonomy)  ->  contacts.
-
-     • Every selector is prefixed .hpx  -> will not collide with Bootstrap /
-       style.css / common.css.
-     • Font: Montserrat (already loaded by the site). No new fonts, no libraries.
-     • The only JavaScript is a ~15-line IIFE for the expandable
-       "About Hindustan Petroleum" button (progressive enhancement: with JS off
-       the panel stays open).
-     • Icons + diagrams are inline SVG. Re-theme via the CSS custom properties
-       in .hpx {}.
-     • Colours sampled from the live site's stylesheet:
-       #001344 navy · #005095 blue · #003f85 blue-dark · #df1a14 red ·
-       #b20100 red-dark · #3a3131 ink · #e4e4e4 line.  Durapol cyan (#1aa7dd)
-       is added for the wordmark + diagrams.
-     • The "HP Durapol" wordmark below is a plain text lockup placeholder —
-       replace it with the official logo asset.
-     ========================================================================= -->
+<!-- code for embedding -->
 <section class="hpx" lang="en" aria-label="HP Petrochemicals — HP Durapol">
   <style>
-    /* ---- tokens + reset ------------------------------------------------- */
+    
     .hpx {
       --hpx-navy: #001344;
       --hpx-blue: #005095;
@@ -368,11 +345,7 @@
             </div>
           </div>
 
-          <!-- ===================== SLIDESHOW CAROUSEL =====================
-               Slide images: assets/durapol-1..5.jpg. When embedding on the live
-               site, repoint each src to an absolute path (e.g.
-               /images/durapol/slide-1.jpg) and update the alt text. Controls +
-               autoplay are wired in the script at the end of this block. -->
+          <!-- ===================== SLIDESHOW CAROUSEL ===================== -->
           <div class="hpx-carousel" role="region" aria-roledescription="carousel"
                aria-label="HP Durapol campaign" tabindex="0">
             <div class="hpx-carousel__viewport">
@@ -831,4 +804,4 @@
     })();
   </script>
 </section>
-<!-- ===================== END HP DURAPOL / HP PETROCHEMICALS BLOCK ===================== -->
+<!-- ===================== EN ===================== -->
