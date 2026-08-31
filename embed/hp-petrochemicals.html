@@ -128,9 +128,8 @@
     .hpx-carousel__viewport { overflow: hidden; }
     .hpx-carousel__track { display: flex; transition: transform .5s ease; }
     .hpx-carousel__slide { position: relative; flex: 0 0 100%; margin: 0; min-width: 0; }
-    .hpx-carousel__img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
-    /* HRRL: below 860px the carousel keeps a normal 4:3 box */
-    .hpx-split--media-first .hpx-carousel__img { aspect-ratio: 4 / 3; object-fit: cover; }
+    /* keep every slide at its natural aspect ratio - never crop */
+    .hpx-carousel__img { display: block; width: 100%; height: auto; }
     .hpx-carousel__btn { position: absolute; top: 50%; transform: translateY(-50%); width: 2.4rem; height: 2.4rem; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); color: var(--hpx-navy); cursor: pointer; transition: background-color .15s ease; z-index: 3; }
     .hpx-carousel__btn:hover { background: #fff; }
     .hpx-carousel__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
@@ -193,21 +192,15 @@
 
     /* ---- HRRL split intro ------------------------------------------------- */
     .hpx-split { display: grid; gap: 1.75rem; align-items: start; }
-    .hpx-split__media { border-radius: var(--hpx-radius); overflow: hidden; border: 1px solid var(--hpx-line); background: linear-gradient(135deg, #eef4fa, #dbe7f3); aspect-ratio: 4 / 3; display: grid; place-items: center; color: var(--hpx-blue-dark); text-align: center; padding: 1.5rem; }
-    .hpx-split__media span { font-size: .78rem; font-weight: 600; }
     .hpx-split p + p { margin-top: .8rem; }
     .hpx-split p b { color: var(--hpx-navy); }
+    /* carousel sized to the photos (natural ratio), not stretched */
+    .hpx-split--media-first .hpx-carousel { width: 100%; max-width: 360px; margin-inline: auto; }
     @media (min-width: 860px) {
       .hpx-split { grid-template-columns: 1.05fr .95fr; gap: 2.5rem; }
-      /* carousel on the left, narrower; text on the right */
-      .hpx-split--media-first { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: stretch; }
-      /* carousel fills its cell, whose height is driven by the text column,
-         so the image is exactly as tall as the text and never overflows */
-      .hpx-split--media-first .hpx-carousel { min-height: 0; }
-      .hpx-split--media-first .hpx-carousel__viewport { position: absolute; inset: 0; }
-      .hpx-split--media-first .hpx-carousel__track { height: 100%; }
-      .hpx-split--media-first .hpx-carousel__slide { height: 100%; }
-      .hpx-split--media-first .hpx-carousel__img { height: 100%; aspect-ratio: auto; }
+      /* carousel column on the left, capped to the image width; text fills the rest */
+      .hpx-split--media-first { grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 2.25rem; }
+      .hpx-split--media-first .hpx-carousel { margin-inline: 0; }
     }
 
     /* ---- "uniqueness" stat cards --------------------------------------- */
